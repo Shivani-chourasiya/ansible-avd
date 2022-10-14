@@ -1,3 +1,259 @@
 {
+  "properties": {
+    "core_interfaces": {
+      "properties": {
+        "p2p_links": {
+          "items": {
+            "properties": {
+              "as": {
+                "description": "AS Numbers for BGP | Required with bgp peering\n",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "node_a_as",
+                    "node_b_as"
+                  ]
+                },
+                "type": "array",
+                "title": "As"
+              },
+              "bfd": {
+                "default": false,
+                "description": "Enable BFD (only considered for BGP).\n",
+                "type": "boolean",
+                "title": "Bfd"
+              },
+              "id": {
+                "description": "Unique id per subnet_summary. Used to calculate ip addresses or Required with ip_pool.\n",
+                "type": "integer",
+                "title": "Id"
+              },
+              "include_in_underlay_protocol": {
+                "default": true,
+                "description": "Add this interface to underlay routing protocol.\n",
+                "type": "boolean",
+                "title": "Include In Underlay Protocol"
+              },
+              "interfaces": {
+                "description": "Interfaces where this link should be configured | Required unless using port-channels\n",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "node_a_interface",
+                    "node_b_interface"
+                  ]
+                },
+                "type": "array",
+                "title": "Interfaces"
+              },
+              "ip": {
+                "description": "Specific IP addresses used on this P2P link\n",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "title": "Ip"
+              },
+              "ip_pool": {
+                "description": "IP Pool defined under p2p_links_ip_pools. A /31 will be taken from the pool per P2P link\n",
+                "title": "P2P Pool Name",
+                "type": "string"
+              },
+              "ipv6_enable": {
+                "default": false,
+                "description": "Allows turning on ipv6 for the link or profile (also autodetected based on underlay_rfc5549 and include_in_underlay_protocol)\n",
+                "type": "boolean",
+                "title": "Ipv6 Enable"
+              },
+              "isis_authentication_key": {
+                "default": "$1c$sTNAlR6rKSw=",
+                "type": "string",
+                "title": "Isis Authentication Key"
+              },
+              "isis_authentication_mode": {
+                "default": "md5",
+                "type": "string",
+                "title": "Isis Authentication Mode"
+              },
+              "isis_circuit_type": {
+                "default": "level-2",
+                "type": "string",
+                "title": "Isis Circuit Type"
+              },
+              "isis_hello_padding": {
+                "default": false,
+                "type": "boolean",
+                "title": "Isis Hello Padding"
+              },
+              "isis_metric": {
+                "default": 60,
+                "type": "integer",
+                "title": "Isis Metric"
+              },
+              "macsec_profile": {
+                "description": "MAC Security Profile\n",
+                "title": "MAC Security Profile Name",
+                "type": "string"
+              },
+              "mpls_ip": {
+                "description": "Default value is true if switch.mpls_lsr is true\n",
+                "type": "boolean",
+                "title": "Mpls Ip"
+              },
+              "mpls_ldp": {
+                "description": "Default value is true for ldp underlay variants, otherwise false\n",
+                "type": "boolean",
+                "title": "Mpls Ldp"
+              },
+              "mtu": {
+                "description": "MTU for this P2P link. Default value same as p2p_uplinks_mtu.\n",
+                "type": "integer",
+                "title": "Mtu"
+              },
+              "nodes": {
+                "description": "Nodes where this link should be configured\n",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "node_a",
+                    "node_b"
+                  ]
+                },
+                "type": "array",
+                "title": "Nodes"
+              },
+              "port_channel": {
+                "title": "Port-channel parameters",
+                "properties": {
+                  "mode": {
+                    "default": "active",
+                    "type": "string",
+                    "title": "Mode"
+                  },
+                  "nodes_child_interfaces": {
+                    "items": {
+                      "properties": {
+                        "node": {
+                          "type": "string",
+                          "title": "Node"
+                        },
+                        "node_interfaces": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array",
+                          "title": "Node Interfaces"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "type": "object"
+                    },
+                    "type": "array",
+                    "title": "Nodes Child Interfaces"
+                  }
+                },
+                "additionalProperties": false,
+                "type": "object"
+              },
+              "profile": {
+                "description": "Profile defined under p2p_profiles\n",
+                "title": "P2P Profile Name",
+                "type": "string"
+              },
+              "ptp_enable": {
+                "default": false,
+                "description": "Enable PTP\n",
+                "type": "boolean",
+                "title": "Ptp Enable"
+              },
+              "qos_profile": {
+                "description": "QOS Service Profile\n",
+                "title": "QOS Profile Name",
+                "type": "string"
+              },
+              "raw_eos_cli": {
+                "description": "EOS CLI rendered directly on the point-to-point interface in the final EOS configuration.\n",
+                "type": "string",
+                "title": "Raw Eos Cli"
+              },
+              "speed": {
+                "type": "string",
+                "enum": [
+                  "speed",
+                  "auto speed",
+                  "forced speed"
+                ],
+                "title": "Speed"
+              },
+              "subnet": {
+                "description": "Subnet used on this P2P link or Optional\n",
+                "type": "string",
+                "title": "Subnet"
+              }
+            },
+            "required": [
+              "nodes"
+            ],
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "array",
+          "title": "P2P Links"
+        },
+        "p2p_links_ip_pools": {
+          "items": {
+            "properties": {
+              "ipv4_pool": {
+                "type": "string",
+                "title": "Ipv4 Pool"
+              },
+              "name": {
+                "title": "P2P Pool Name",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "array",
+          "title": "P2P Links Ip Pools"
+        },
+        "p2p_links_profiles": {
+          "items": {
+            "properties": {
+              "name": {
+                "description": "Any variable supported under p2p_links can be inherited from a profile.\n",
+                "title": "P2P Profile Name",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "array",
+          "title": "P2P Links Profiles"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Core Interfaces"
+    },
+    "isis_default_circuit_type": {
+      "default": "level-2",
+      "type": "string",
+      "enum": [
+        "level-1-2",
+        "level-1",
+        "level-2"
+      ],
+      "title": "Isis Default Circuit Type"
+    },
+    "isis_default_metric": {
+      "default": 50,
+      "type": "integer",
+      "title": "Isis Default Metric"
+    }
+  },
+  "additionalProperties": true,
   "type": "object"
 }

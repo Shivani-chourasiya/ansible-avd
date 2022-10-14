@@ -65,7 +65,9 @@ ethernet_interfaces:
 {%     endfor %}
 {%     for p2p_interface_key in core_interfaces_data.p2p_port_channels | arista.avd.natural_sort %}
 {%         set p2p_interface = core_interfaces_data.p2p_port_channels[p2p_interface_key] %}
-{%         for interface in p2p_interface.port_channel.nodes_child_interfaces[inventory_hostname] %}
+{%         for node in p2p_interface.port_channel.nodes_child_interfaces %}
+{%             if node.node == inventory_hostname %}
+{%                 for interface in node.interfaces %}
   {{ interface }}:
     type: routed
     description: {{ p2p_interface.description }}
@@ -73,6 +75,8 @@ ethernet_interfaces:
     channel_group:
       id: {{ p2p_interface.channel_group_id }}
       mode: {{ p2p_interface.port_channel.mode | arista.avd.default("active") }}
-{%         endfor %}
+{%                  endfor %}
+{%              endif %}
+{%          endfor %}
 {%     endfor %}
 {% endif %}

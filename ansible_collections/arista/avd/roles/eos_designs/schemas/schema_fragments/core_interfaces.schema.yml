@@ -1,0 +1,180 @@
+# yaml-language-server: $schema=../../../../plugins/plugin_utils/schema/avd_meta_schema.json
+# Line above is used by RedHat's YAML Schema vscode extension
+# Use Ctrl + Space to get suggestions for every field. Autocomplete will pop up after typing 2 letters.
+type: dict
+keys:
+  core_interfaces:
+    type: dict
+    keys:
+      p2p_links_ip_pools:
+        type: list
+        items:
+          type: dict
+          keys:
+            name:
+              display_name:  P2P Pool Name
+              type: str
+            ipv4_pool:
+              type: str
+      p2p_links_profiles:
+        type: list
+        items:
+          type: dict
+          keys:
+            name:
+              display_name: P2P Profile Name
+              type: str
+              description: |
+                Any variable supported under p2p_links can be inherited from a profile.
+
+
+
+
+
+
+
+
+
+      p2p_links:
+        type: list
+        items:
+          type: dict
+          keys:
+            id:
+              type: int
+              convert_types:
+              - str
+              description: |
+                Unique id per subnet_summary. Used to calculate ip addresses or Required with ip_pool.
+            speed:
+              type: str
+              valid_values: ["speed", "auto speed", "forced speed"]
+            ip_pool:
+              display_name: P2P Pool Name
+              type: str
+              description: |
+                IP Pool defined under p2p_links_ip_pools. A /31 will be taken from the pool per P2P link
+            subnet:
+              type: str
+              description: |
+                Subnet used on this P2P link or Optional
+            ip:
+              type: list
+              description: |
+                Specific IP addresses used on this P2P link
+              items:
+                type: str
+            ipv6_enable:
+              type: bool
+              default: false
+              description: |
+                Allows turning on ipv6 for the link or profile (also autodetected based on underlay_rfc5549 and include_in_underlay_protocol)
+            nodes:
+              type: list
+              description: |
+                Nodes where this link should be configured
+              required: true
+              items:
+                type: str
+                valid_values: ["node_a", "node_b"]
+            interfaces:
+              type: list
+              description: |
+                Interfaces where this link should be configured | Required unless using port-channels
+              items:
+                type: str
+                valid_values: ["node_a_interface", "node_b_interface"]
+            as:
+              type: list
+              description: |
+                AS Numbers for BGP | Required with bgp peering
+              items:
+                type: str
+                valid_values: ["node_a_as", "node_b_as"]
+            include_in_underlay_protocol:
+              type: bool
+              default: true
+              description: |
+                Add this interface to underlay routing protocol.
+            isis_hello_padding:
+              type: bool
+              default: false
+            isis_metric:
+              type: int
+              convert_types:
+              - str
+              default: 60
+            isis_circuit_type:
+              type: str
+              default: level-2
+            isis_authentication_mode:
+              type: str
+              default: md5
+            isis_authentication_key:
+              type: str
+              default: $1c$sTNAlR6rKSw=
+            mpls_ip:
+              type: bool
+              description: |
+                Default value is true if switch.mpls_lsr is true
+            mpls_ldp:
+              type: bool
+              description: |
+                Default value is true for ldp underlay variants, otherwise false
+            mtu:
+              type: int
+              convert_types:
+              - str
+              description: |
+                MTU for this P2P link. Default value same as p2p_uplinks_mtu.
+            bfd:
+              type: bool
+              default: false
+              description: |
+                Enable BFD (only considered for BGP).
+            ptp_enable:
+              type: bool
+              default: false
+              description: |
+                Enable PTP
+            qos_profile:
+              display_name: QOS Profile Name
+              type: str
+              description: |
+                QOS Service Profile
+            macsec_profile:
+              display_name: MAC Security Profile Name
+              type: str
+              description: |
+                MAC Security Profile
+            profile:
+              display_name: P2P Profile Name
+              type: str
+              description: |
+                Profile defined under p2p_profiles
+            raw_eos_cli:
+              type: str
+              description: |
+                EOS CLI rendered directly on the point-to-point interface in the final EOS configuration.
+            port_channel:
+              display_name: Port-channel parameters
+              type: dict
+              keys:
+                mode:
+                  type: str
+                  default: active
+                nodes_child_interfaces:
+                  type: list
+                  primary_key: node
+                  secondary_key: node_interfaces
+                  convert_types:
+                  - dict
+                  items:
+                    type: dict
+                    keys:
+                      node:
+                        type: str
+                      node_interfaces:
+                        type: list
+                        items:
+                          type: str

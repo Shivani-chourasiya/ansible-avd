@@ -39,12 +39,16 @@
                             link_info.p2p_profile.subnet) %}
 {%         set ip_list = p2p_link.ip | arista.avd.default(
                             link_info.p2p_profile.ip) %}
-{%         if p2p_link.port_channel.nodes_child_interfaces is arista.avd.defined and inventory_hostname in p2p_link.port_channel.nodes_child_interfaces %}
-{%             set interfaces = [] %}
-{%             for node in nodes %}
-{%                 set node_interfaces = p2p_link.port_channel.nodes_child_interfaces[node] %}
-{%                 set channel_group_id = (node_interfaces[0] | regex_findall("\d") | join) %}
-{%                 do interfaces.append("Port-Channel" ~ channel_group_id) %}
+{%         if p2p_link.port_channel.nodes_child_interfaces is arista.avd.defined %}
+{%             for nodes_child_interface in p2p_link.port_channel.nodes_child_interfaces %}
+{%                 if nodes_child_interface.node == inventory_hostname %}
+{%                     set interfaces = [] %}
+{%                     for node in nodes %}
+{%                         set node_interfaces = nodes_child_interface.interfaces %}
+{%                         set channel_group_id = (node_interfaces[0] | regex_findall("\d") | join) %}
+{%                         do interfaces.append("Port-Channel" ~ channel_group_id) %}
+{%                     endfor %}
+{%                 endif %}
 {%             endfor %}
 {%         else %}
 {%             set interfaces = p2p_link.interfaces | arista.avd.default(

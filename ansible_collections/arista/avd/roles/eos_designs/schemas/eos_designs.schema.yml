@@ -1,1 +1,216 @@
-{}
+allow_other_keys: true
+keys:
+  core_interfaces:
+    keys:
+      p2p_links:
+        items:
+          keys:
+            as:
+              description: 'AS Numbers for BGP | Required with bgp peering
+
+                '
+              items:
+                type: str
+                valid_values:
+                - node_a_as
+                - node_b_as
+              type: list
+            bfd:
+              default: false
+              description: 'Enable BFD (only considered for BGP).
+
+                '
+              type: bool
+            id:
+              convert_types:
+              - str
+              description: 'Unique id per subnet_summary. Used to calculate ip addresses
+                or Required with ip_pool.
+
+                '
+              type: int
+            include_in_underlay_protocol:
+              default: true
+              description: 'Add this interface to underlay routing protocol.
+
+                '
+              type: bool
+            interfaces:
+              description: 'Interfaces where this link should be configured | Required
+                unless using port-channels
+
+                '
+              items:
+                type: str
+                valid_values:
+                - node_a_interface
+                - node_b_interface
+              type: list
+            ip:
+              description: 'Specific IP addresses used on this P2P link
+
+                '
+              items:
+                type: str
+              type: list
+            ip_pool:
+              description: 'IP Pool defined under p2p_links_ip_pools. A /31 will be
+                taken from the pool per P2P link
+
+                '
+              display_name: P2P Pool Name
+              type: str
+            ipv6_enable:
+              default: false
+              description: 'Allows turning on ipv6 for the link or profile (also autodetected
+                based on underlay_rfc5549 and include_in_underlay_protocol)
+
+                '
+              type: bool
+            isis_authentication_key:
+              default: $1c$sTNAlR6rKSw=
+              type: str
+            isis_authentication_mode:
+              default: md5
+              type: str
+            isis_circuit_type:
+              default: level-2
+              type: str
+            isis_hello_padding:
+              default: false
+              type: bool
+            isis_metric:
+              convert_types:
+              - str
+              default: 60
+              type: int
+            macsec_profile:
+              description: 'MAC Security Profile
+
+                '
+              display_name: MAC Security Profile Name
+              type: str
+            mpls_ip:
+              description: 'Default value is true if switch.mpls_lsr is true
+
+                '
+              type: bool
+            mpls_ldp:
+              description: 'Default value is true for ldp underlay variants, otherwise
+                false
+
+                '
+              type: bool
+            mtu:
+              convert_types:
+              - str
+              description: 'MTU for this P2P link. Default value same as p2p_uplinks_mtu.
+
+                '
+              type: int
+            nodes:
+              description: 'Nodes where this link should be configured
+
+                '
+              items:
+                type: str
+                valid_values:
+                - node_a
+                - node_b
+              required: true
+              type: list
+            port_channel:
+              display_name: Port-channel parameters
+              keys:
+                mode:
+                  default: active
+                  type: str
+                nodes_child_interfaces:
+                  convert_types:
+                  - dict
+                  items:
+                    keys:
+                      node:
+                        type: str
+                      node_interfaces:
+                        items:
+                          type: str
+                        type: list
+                    type: dict
+                  primary_key: node
+                  secondary_key: node_interfaces
+                  type: list
+              type: dict
+            profile:
+              description: 'Profile defined under p2p_profiles
+
+                '
+              display_name: P2P Profile Name
+              type: str
+            ptp_enable:
+              default: false
+              description: 'Enable PTP
+
+                '
+              type: bool
+            qos_profile:
+              description: 'QOS Service Profile
+
+                '
+              display_name: QOS Profile Name
+              type: str
+            raw_eos_cli:
+              description: 'EOS CLI rendered directly on the point-to-point interface
+                in the final EOS configuration.
+
+                '
+              type: str
+            speed:
+              type: str
+              valid_values:
+              - speed
+              - auto speed
+              - forced speed
+            subnet:
+              description: 'Subnet used on this P2P link or Optional
+
+                '
+              type: str
+          type: dict
+        type: list
+      p2p_links_ip_pools:
+        items:
+          keys:
+            ipv4_pool:
+              type: str
+            name:
+              display_name: P2P Pool Name
+              type: str
+          type: dict
+        type: list
+      p2p_links_profiles:
+        items:
+          keys:
+            name:
+              description: 'Any variable supported under p2p_links can be inherited
+                from a profile.
+
+                '
+              display_name: P2P Profile Name
+              type: str
+          type: dict
+        type: list
+    type: dict
+  isis_default_circuit_type:
+    default: level-2
+    type: str
+    valid_values:
+    - level-1-2
+    - level-1
+    - level-2
+  isis_default_metric:
+    convert_types:
+    - str
+    default: 50
+    type: int
+type: dict

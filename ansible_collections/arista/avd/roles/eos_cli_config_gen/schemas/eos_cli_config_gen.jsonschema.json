@@ -779,6 +779,25 @@
       },
       "title": "Domain List"
     },
+    "dot1x": {
+      "type": "object",
+      "title": "Global 802.1x Authentication",
+      "properties": {
+        "system_auth_control": {
+          "type": "boolean",
+          "title": "System Auth Control"
+        },
+        "protocol_lldp_bypass": {
+          "type": "boolean",
+          "title": "Protocol LLDP Bypass"
+        },
+        "dynamic_authorization": {
+          "type": "boolean",
+          "title": "Dynamic Authorization"
+        }
+      },
+      "additionalProperties": false
+    },
     "enable_password": {
       "type": "object",
       "properties": {
@@ -2217,6 +2236,50 @@
       },
       "additionalProperties": false
     },
+    "management_api_models": {
+      "title": "Management API Models",
+      "type": "object",
+      "properties": {
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "enum": [
+                  "sysdb",
+                  "smash"
+                ],
+                "title": "Name"
+              },
+              "paths": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "title": "Path"
+                    },
+                    "disabled": {
+                      "type": "boolean",
+                      "default": false,
+                      "title": "Disabled"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "title": "Paths"
+              }
+            },
+            "additionalProperties": false
+          },
+          "title": "Providers"
+        }
+      },
+      "additionalProperties": false
+    },
     "management_console": {
       "type": "object",
       "properties": {
@@ -2229,6 +2292,28 @@
       },
       "additionalProperties": false,
       "title": "Management Console"
+    },
+    "management_defaults": {
+      "type": "object",
+      "properties": {
+        "secret": {
+          "type": "object",
+          "properties": {
+            "hash": {
+              "type": "string",
+              "enum": [
+                "md5",
+                "sha512"
+              ],
+              "title": "Hash"
+            }
+          },
+          "additionalProperties": false,
+          "title": "Secret"
+        }
+      },
+      "additionalProperties": false,
+      "title": "Management Defaults"
     },
     "management_interfaces": {
       "type": "array",
@@ -2729,6 +2814,140 @@
       },
       "additionalProperties": false,
       "title": "Monitor Connectivity"
+    },
+    "monitor_sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Session Name",
+            "title": "Name"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Interface name, range or comma separated list",
+                  "title": "Name"
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "rx",
+                    "tx",
+                    "both"
+                  ],
+                  "title": "Direction"
+                },
+                "access_group": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "ip",
+                        "ipv6",
+                        "mac"
+                      ],
+                      "title": "Type"
+                    },
+                    "name": {
+                      "description": "ACL Name",
+                      "type": "string",
+                      "title": "Name"
+                    },
+                    "priority": {
+                      "type": "integer",
+                      "title": "Priority"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "title": "Access Group"
+                }
+              },
+              "additionalProperties": false
+            },
+            "title": "Sources"
+          },
+          "destinations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "'cpu' or interface name, range or comma separated list"
+            },
+            "title": "Destinations"
+          },
+          "encapsulation_gre_metadata_tx": {
+            "type": "boolean",
+            "title": "Encapsulation GRE metadata TX"
+          },
+          "header_remove_size": {
+            "type": "integer",
+            "description": "Number of bytes to remove from header",
+            "title": "Header Remove Size"
+          },
+          "access_group": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "ip",
+                  "ipv6",
+                  "mac"
+                ],
+                "title": "Type"
+              },
+              "name": {
+                "title": "ACL Name",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "title": "Access Group"
+          },
+          "rate_limit_per_ingress_chip": {
+            "type": "string",
+            "description": "Ratelimit and unit as string.\nExamples:\n  \"100000 bps\"\n  \"100 kbps\"\n  \"10 mbps\"\n",
+            "title": "Rate Limit Per Ingress Chip"
+          },
+          "rate_limit_per_egress_chip": {
+            "type": "string",
+            "description": "Ratelimit and unit as string.\nExamples:\n  \"100000 bps\"\n  \"100 kbps\"\n  \"10 mbps\"\n",
+            "title": "Rate Limit Per Egress Chip"
+          },
+          "sample": {
+            "type": "integer",
+            "title": "Sample"
+          },
+          "truncate": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "title": "Enabled"
+              },
+              "size": {
+                "type": "integer",
+                "description": "Size in bytes",
+                "title": "Size"
+              }
+            },
+            "additionalProperties": false,
+            "title": "Truncate"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "title": "Monitor Sessions"
     },
     "mpls": {
       "type": "object",
@@ -3263,6 +3482,37 @@
       },
       "additionalProperties": false
     },
+    "router_l2_vpn": {
+      "type": "object",
+      "title": "Router L2 VPN",
+      "properties": {
+        "nd_rs_flooding_disabled": {
+          "type": "boolean",
+          "title": "ND RS Flooding Disabled"
+        },
+        "virtual_router_nd_ra_flooding_disabled": {
+          "type": "boolean",
+          "title": "Virtual Router ND RA Flooding Disabled"
+        },
+        "arp_selective_install": {
+          "type": "boolean",
+          "title": "ARP Selective Install"
+        },
+        "arp_proxy": {
+          "type": "object",
+          "title": "ARP Proxy",
+          "properties": {
+            "prefix_list": {
+              "type": "string",
+              "description": "Prefix-list Name",
+              "title": "Prefix List"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
     "router_pim_sparse_mode": {
       "type": "object",
       "title": "Routing PIM Sparse Mode",
@@ -3761,6 +4011,48 @@
         "additionalProperties": false
       }
     },
+    "switchport_default": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "routed",
+            "access"
+          ],
+          "title": "Mode"
+        },
+        "phone": {
+          "type": "object",
+          "properties": {
+            "cos": {
+              "type": "integer",
+              "title": "COS",
+              "minimum": 0,
+              "maximum": 7
+            },
+            "trunk": {
+              "type": "string",
+              "enum": [
+                "tagged",
+                "untagged"
+              ],
+              "title": "Trunk"
+            },
+            "vlan": {
+              "type": "integer",
+              "title": "VLAN ID",
+              "minimum": 1,
+              "maximum": 4094
+            }
+          },
+          "additionalProperties": false,
+          "title": "Phone"
+        }
+      },
+      "additionalProperties": false,
+      "title": "Switchport Default"
+    },
     "tcam_profile": {
       "type": "object",
       "title": "Hardware TCAM Profiles",
@@ -3795,6 +4087,36 @@
         }
       },
       "additionalProperties": false
+    },
+    "trackers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of tracker object",
+            "title": "Name"
+          },
+          "interface": {
+            "type": "string",
+            "description": "Name of tracked interface",
+            "title": "Interface"
+          },
+          "tracked_property": {
+            "type": "string",
+            "default": "line-protocol",
+            "description": "Property to track",
+            "title": "Tracked Property"
+          }
+        },
+        "required": [
+          "name",
+          "interface"
+        ],
+        "additionalProperties": false
+      },
+      "title": "Trackers"
     },
     "virtual_source_nat_vrfs": {
       "type": "array",

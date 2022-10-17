@@ -524,6 +524,26 @@ domain_list:
   - <str>
 ```
 
+## Global 802.1x Authentication
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>dot1x</samp>](## "dot1x") | Dictionary |  |  |  | Global 802.1x Authentication |
+| [<samp>&nbsp;&nbsp;system_auth_control</samp>](## "dot1x.system_auth_control") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;protocol_lldp_bypass</samp>](## "dot1x.protocol_lldp_bypass") | Boolean |  |  |  | Protocol LLDP Bypass |
+| [<samp>&nbsp;&nbsp;dynamic_authorization</samp>](## "dot1x.dynamic_authorization") | Boolean |  |  |  |  |
+
+### YAML
+
+```yaml
+dot1x:
+  system_auth_control: <bool>
+  protocol_lldp_bypass: <bool>
+  dynamic_authorization: <bool>
+```
+
 ## Enable Password
 
 ### Variables
@@ -1449,6 +1469,30 @@ management_api_http:
     private_key: <str>
 ```
 
+## Management API Models
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>management_api_models</samp>](## "management_api_models") | Dictionary |  |  |  | Management API Models |
+| [<samp>&nbsp;&nbsp;providers</samp>](## "management_api_models.providers") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;- name</samp>](## "management_api_models.providers.[].name") | String |  |  | Valid Values:<br>- sysdb<br>- smash |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;paths</samp>](## "management_api_models.providers.[].paths") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- path</samp>](## "management_api_models.providers.[].paths.[].path") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disabled</samp>](## "management_api_models.providers.[].paths.[].disabled") | Boolean |  | False |  |  |
+
+### YAML
+
+```yaml
+management_api_models:
+  providers:
+    - name: <str>
+      paths:
+        - path: <str>
+          disabled: <bool>
+```
+
 ## Management Console
 
 ### Variables
@@ -1463,6 +1507,24 @@ management_api_http:
 ```yaml
 management_console:
   idle_timeout: <int>
+```
+
+## Management Defaults
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>management_defaults</samp>](## "management_defaults") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;secret</samp>](## "management_defaults.secret") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;hash</samp>](## "management_defaults.secret.hash") | String |  |  | Valid Values:<br>- md5<br>- sha512 |  |
+
+### YAML
+
+```yaml
+management_defaults:
+  secret:
+    hash: <str>
 ```
 
 ## Management Interfaces
@@ -1713,6 +1775,62 @@ monitor_connectivity:
           ip: <str>
           local_interfaces: <str>
           url: <str>
+```
+
+## Monitor Sessions
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>monitor_sessions</samp>](## "monitor_sessions") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- name</samp>](## "monitor_sessions.[].name") | String | Required |  |  | Session Name |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;sources</samp>](## "monitor_sessions.[].sources") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name</samp>](## "monitor_sessions.[].sources.[].name") | String |  |  |  | Interface name, range or comma separated list |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction</samp>](## "monitor_sessions.[].sources.[].direction") | String |  |  | Valid Values:<br>- rx<br>- tx<br>- both |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access_group</samp>](## "monitor_sessions.[].sources.[].access_group") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</samp>](## "monitor_sessions.[].sources.[].access_group.type") | String |  |  | Valid Values:<br>- ip<br>- ipv6<br>- mac |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</samp>](## "monitor_sessions.[].sources.[].access_group.name") | String |  |  |  | ACL Name |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</samp>](## "monitor_sessions.[].sources.[].access_group.priority") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;destinations</samp>](## "monitor_sessions.[].destinations") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "monitor_sessions.[].destinations.[].&lt;str&gt;") | String |  |  |  | 'cpu' or interface name, range or comma separated list |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;encapsulation_gre_metadata_tx</samp>](## "monitor_sessions.[].encapsulation_gre_metadata_tx") | Boolean |  |  |  | Encapsulation GRE metadata TX |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;header_remove_size</samp>](## "monitor_sessions.[].header_remove_size") | Integer |  |  |  | Number of bytes to remove from header |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;access_group</samp>](## "monitor_sessions.[].access_group") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</samp>](## "monitor_sessions.[].access_group.type") | String |  |  | Valid Values:<br>- ip<br>- ipv6<br>- mac |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</samp>](## "monitor_sessions.[].access_group.name") | String |  |  |  | ACL Name |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;rate_limit_per_ingress_chip</samp>](## "monitor_sessions.[].rate_limit_per_ingress_chip") | String |  |  |  | Ratelimit and unit as string.<br>Examples:<br>  "100000 bps"<br>  "100 kbps"<br>  "10 mbps"<br> |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;rate_limit_per_egress_chip</samp>](## "monitor_sessions.[].rate_limit_per_egress_chip") | String |  |  |  | Ratelimit and unit as string.<br>Examples:<br>  "100000 bps"<br>  "100 kbps"<br>  "10 mbps"<br> |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;sample</samp>](## "monitor_sessions.[].sample") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;truncate</samp>](## "monitor_sessions.[].truncate") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled</samp>](## "monitor_sessions.[].truncate.enabled") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size</samp>](## "monitor_sessions.[].truncate.size") | Integer |  |  |  | Size in bytes |
+
+### YAML
+
+```yaml
+monitor_sessions:
+  - name: <str>
+    sources:
+      - name: <str>
+        direction: <str>
+        access_group:
+          type: <str>
+          name: <str>
+          priority: <int>
+    destinations:
+      - <str>
+    encapsulation_gre_metadata_tx: <bool>
+    header_remove_size: <int>
+    access_group:
+      type: <str>
+      name: <str>
+    rate_limit_per_ingress_chip: <str>
+    rate_limit_per_egress_chip: <str>
+    sample: <int>
+    truncate:
+      enabled: <bool>
+      size: <int>
 ```
 
 ## MPLS
@@ -2007,6 +2125,30 @@ router_igmp:
   ssm_aware: <bool>
 ```
 
+## Router L2 VPN
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>router_l2_vpn</samp>](## "router_l2_vpn") | Dictionary |  |  |  | Router L2 VPN |
+| [<samp>&nbsp;&nbsp;nd_rs_flooding_disabled</samp>](## "router_l2_vpn.nd_rs_flooding_disabled") | Boolean |  |  |  | ND RS Flooding Disabled |
+| [<samp>&nbsp;&nbsp;virtual_router_nd_ra_flooding_disabled</samp>](## "router_l2_vpn.virtual_router_nd_ra_flooding_disabled") | Boolean |  |  |  | Virtual Router ND RA Flooding Disabled |
+| [<samp>&nbsp;&nbsp;arp_selective_install</samp>](## "router_l2_vpn.arp_selective_install") | Boolean |  |  |  | ARP Selective Install |
+| [<samp>&nbsp;&nbsp;arp_proxy</samp>](## "router_l2_vpn.arp_proxy") | Dictionary |  |  |  | ARP Proxy |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;prefix_list</samp>](## "router_l2_vpn.arp_proxy.prefix_list") | String |  |  |  | Prefix-list Name |
+
+### YAML
+
+```yaml
+router_l2_vpn:
+  nd_rs_flooding_disabled: <bool>
+  virtual_router_nd_ra_flooding_disabled: <bool>
+  arp_selective_install: <bool>
+  arp_proxy:
+    prefix_list: <str>
+```
+
 ## Routing PIM Sparse Mode
 
 ### Variables
@@ -2245,6 +2387,30 @@ static_routes:
     metric: <int>
 ```
 
+## Switchport Default
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>switchport_default</samp>](## "switchport_default") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;mode</samp>](## "switchport_default.mode") | String |  |  | Valid Values:<br>- routed<br>- access |  |
+| [<samp>&nbsp;&nbsp;phone</samp>](## "switchport_default.phone") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;cos</samp>](## "switchport_default.phone.cos") | Integer |  |  | Min: 0<br>Max: 7 | COS |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;trunk</samp>](## "switchport_default.phone.trunk") | String |  |  | Valid Values:<br>- tagged<br>- untagged |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;vlan</samp>](## "switchport_default.phone.vlan") | Integer |  |  | Min: 1<br>Max: 4094 | VLAN ID |
+
+### YAML
+
+```yaml
+switchport_default:
+  mode: <str>
+  phone:
+    cos: <int>
+    trunk: <str>
+    vlan: <int>
+```
+
 ## Hardware TCAM Profiles
 
 ### Variables
@@ -2265,6 +2431,26 @@ tcam_profile:
   profiles:
     - name: <str>
       config: <str>
+```
+
+## Trackers
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>trackers</samp>](## "trackers") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- name</samp>](## "trackers.[].name") | String | Required, Unique |  |  | Name of tracker object |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;interface</samp>](## "trackers.[].interface") | String | Required |  |  | Name of tracked interface |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;tracked_property</samp>](## "trackers.[].tracked_property") | String |  | line-protocol |  | Property to track |
+
+### YAML
+
+```yaml
+trackers:
+  - name: <str>
+    interface: <str>
+    tracked_property: <str>
 ```
 
 ## Virtual Source NAT

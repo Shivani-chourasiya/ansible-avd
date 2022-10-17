@@ -722,6 +722,17 @@ keys:
     items:
       type: str
       description: Domain name
+  dot1x:
+    type: dict
+    display_name: Global 802.1x Authentication
+    keys:
+      system_auth_control:
+        type: bool
+      protocol_lldp_bypass:
+        type: bool
+        display_name: Protocol LLDP Bypass
+      dynamic_authorization:
+        type: bool
   enable_password:
     type: dict
     keys:
@@ -1834,6 +1845,30 @@ keys:
           private_key:
             type: str
             description: Name of private key; certificate must also be specified
+  management_api_models:
+    display_name: Management API Models
+    type: dict
+    keys:
+      providers:
+        type: list
+        items:
+          type: dict
+          keys:
+            name:
+              type: str
+              valid_values:
+              - sysdb
+              - smash
+            paths:
+              type: list
+              items:
+                type: dict
+                keys:
+                  path:
+                    type: str
+                  disabled:
+                    type: bool
+                    default: false
   management_console:
     type: dict
     keys:
@@ -1843,6 +1878,17 @@ keys:
         max: 86400
         convert_types:
         - str
+  management_defaults:
+    type: dict
+    keys:
+      secret:
+        type: dict
+        keys:
+          hash:
+            type: str
+            valid_values:
+            - md5
+            - sha512
   management_interfaces:
     type: list
     primary_key: name
@@ -2162,6 +2208,94 @@ keys:
                     type: str
                   url:
                     type: str
+  monitor_sessions:
+    type: list
+    convert_types:
+    - dict
+    items:
+      type: dict
+      keys:
+        name:
+          type: str
+          required: true
+          description: Session Name
+        sources:
+          type: list
+          items:
+            type: dict
+            keys:
+              name:
+                type: str
+                description: Interface name, range or comma separated list
+              direction:
+                type: str
+                valid_values:
+                - rx
+                - tx
+                - both
+              access_group:
+                type: dict
+                keys:
+                  type:
+                    type: str
+                    valid_values:
+                    - ip
+                    - ipv6
+                    - mac
+                  name:
+                    description: ACL Name
+                    type: str
+                  priority:
+                    type: int
+                    convert_types:
+                    - str
+        destinations:
+          type: list
+          items:
+            type: str
+            description: '''cpu'' or interface name, range or comma separated list'
+        encapsulation_gre_metadata_tx:
+          type: bool
+          display_name: Encapsulation GRE metadata TX
+        header_remove_size:
+          type: int
+          description: Number of bytes to remove from header
+          convert_types:
+          - str
+        access_group:
+          type: dict
+          keys:
+            type:
+              type: str
+              valid_values:
+              - ip
+              - ipv6
+              - mac
+            name:
+              display_name: ACL Name
+              type: str
+        rate_limit_per_ingress_chip:
+          type: str
+          description: "Ratelimit and unit as string.\nExamples:\n  \"100000 bps\"\n
+            \ \"100 kbps\"\n  \"10 mbps\"\n"
+        rate_limit_per_egress_chip:
+          type: str
+          description: "Ratelimit and unit as string.\nExamples:\n  \"100000 bps\"\n
+            \ \"100 kbps\"\n  \"10 mbps\"\n"
+        sample:
+          type: int
+          convert_types:
+          - str
+        truncate:
+          type: dict
+          keys:
+            enabled:
+              type: bool
+            size:
+              type: int
+              description: Size in bytes
+              convert_types:
+              - str
   mpls:
     type: dict
     display_name: MPLS
@@ -2535,6 +2669,26 @@ keys:
     keys:
       ssm_aware:
         type: bool
+  router_l2_vpn:
+    type: dict
+    display_name: Router L2 VPN
+    keys:
+      nd_rs_flooding_disabled:
+        type: bool
+        display_name: ND RS Flooding Disabled
+      virtual_router_nd_ra_flooding_disabled:
+        type: bool
+        display_name: Virtual Router ND RA Flooding Disabled
+      arp_selective_install:
+        type: bool
+        display_name: ARP Selective Install
+      arp_proxy:
+        type: dict
+        display_name: ARP Proxy
+        keys:
+          prefix_list:
+            type: str
+            description: Prefix-list Name
   router_pim_sparse_mode:
     type: dict
     display_name: Routing PIM Sparse Mode
@@ -2906,6 +3060,36 @@ keys:
           - str
           min: 0
           max: 4294967295
+  switchport_default:
+    type: dict
+    keys:
+      mode:
+        type: str
+        valid_values:
+        - routed
+        - access
+      phone:
+        type: dict
+        keys:
+          cos:
+            type: int
+            display_name: COS
+            convert_types:
+            - str
+            min: 0
+            max: 7
+          trunk:
+            type: str
+            valid_values:
+            - tagged
+            - untagged
+          vlan:
+            type: int
+            display_name: VLAN ID
+            convert_types:
+            - str
+            min: 1
+            max: 4094
   tcam_profile:
     type: dict
     display_name: Hardware TCAM Profiles
@@ -2935,6 +3119,24 @@ keys:
                 is often a good idea to import the config from a file.
 
                 Example: "{{lookup(''file'', ''{{ root_dir }}/inventory/TCAM_TRAFFIC_POLICY.conf'')}}"'
+  trackers:
+    type: list
+    primary_key: name
+    items:
+      type: dict
+      keys:
+        name:
+          type: str
+          description: Name of tracker object
+          required: true
+        interface:
+          type: str
+          description: Name of tracked interface
+          required: true
+        tracked_property:
+          type: str
+          default: line-protocol
+          description: Property to track
   virtual_source_nat_vrfs:
     type: list
     primary_key: name

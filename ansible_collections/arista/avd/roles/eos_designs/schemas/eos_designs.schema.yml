@@ -422,6 +422,61 @@ keys:
     description: QOS Profile assigned on all infrastructure links
     display_name: P2P Uplinks QoS Profile
     type: str
+  platform_settings:
+    items:
+      keys:
+        feature_support:
+          keys:
+            interface_storm_control:
+              type: bool
+            queue_monitor_length_notify:
+              type: bool
+          type: dict
+        lag_hardware_only:
+          type: bool
+        management_interface:
+          type: str
+        platforms:
+          items:
+            type: str
+          type: list
+        raw_eos_cli:
+          type: str
+        reload_delay:
+          keys:
+            mlag:
+              type: int
+            non_mlag:
+              type: int
+          type: dict
+        tcam_profile:
+          type: str
+      type: dict
+    type: list
+  platform_speed_groups:
+    items:
+      keys:
+        platform:
+          keys:
+            speeds:
+              items:
+                keys:
+                  speed:
+                    type: str
+                  speed_groups:
+                    items:
+                      type: str
+                    type: list
+                type: dict
+              type: list
+          type: dict
+      type: dict
+    type: list
+  redundancy:
+    keys:
+      protocol:
+        type: str
+    type: dict
   shutdown_interfaces_towards_undeployed_peers:
     default: false
     description: '- It is possible to provision configurations for a complete topology

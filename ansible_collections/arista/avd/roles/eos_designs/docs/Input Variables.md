@@ -631,6 +631,84 @@ QOS Profile assigned on all infrastructure links
 p2p_uplinks_qos_profile: <str>
 ```
 
+## Platform Settings
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>platform_settings</samp>](## "platform_settings") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- feature_support</samp>](## "platform_settings.[].feature_support") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface_storm_control</samp>](## "platform_settings.[].feature_support.interface_storm_control") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue_monitor_length_notify</samp>](## "platform_settings.[].feature_support.queue_monitor_length_notify") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;lag_hardware_only</samp>](## "platform_settings.[].lag_hardware_only") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;management_interface</samp>](## "platform_settings.[].management_interface") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;platforms</samp>](## "platform_settings.[].platforms") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "platform_settings.[].platforms.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;raw_eos_cli</samp>](## "platform_settings.[].raw_eos_cli") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;reload_delay</samp>](## "platform_settings.[].reload_delay") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mlag</samp>](## "platform_settings.[].reload_delay.mlag") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non_mlag</samp>](## "platform_settings.[].reload_delay.non_mlag") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;tcam_profile</samp>](## "platform_settings.[].tcam_profile") | String |  |  |  |  |
+
+### YAML
+
+```yaml
+platform_settings:
+  - feature_support:
+      interface_storm_control: <bool>
+      queue_monitor_length_notify: <bool>
+    lag_hardware_only: <bool>
+    management_interface: <str>
+    platforms:
+      - <str>
+    raw_eos_cli: <str>
+    reload_delay:
+      mlag: <int>
+      non_mlag: <int>
+    tcam_profile: <str>
+```
+
+## Platform Speed Groups
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>platform_speed_groups</samp>](## "platform_speed_groups") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- platform</samp>](## "platform_speed_groups.[].platform") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speeds</samp>](## "platform_speed_groups.[].platform.speeds") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- speed</samp>](## "platform_speed_groups.[].platform.speeds.[].speed") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speed_groups</samp>](## "platform_speed_groups.[].platform.speeds.[].speed_groups") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "platform_speed_groups.[].platform.speeds.[].speed_groups.[].&lt;str&gt;") | String |  |  |  |  |
+
+### YAML
+
+```yaml
+platform_speed_groups:
+  - platform:
+      speeds:
+        - speed: <str>
+          speed_groups:
+            - <str>
+```
+
+## Redundancy
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>redundancy</samp>](## "redundancy") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;protocol</samp>](## "redundancy.protocol") | String |  |  |  |  |
+
+### YAML
+
+```yaml
+redundancy:
+  protocol: <str>
+```
+
 ## Shutdown Interfaces Towards Undeployed Peers
 
 ### Description

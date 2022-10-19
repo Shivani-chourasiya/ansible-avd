@@ -829,6 +829,54 @@ is_deployed: < true | false | default -> true >
 shutdown_interfaces_towards_undeployed_peers: <bool>
 ```
 
+## Tenants
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>tenants</samp>](## "tenants") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- name</samp>](## "tenants.[].name") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;point_to_point_services</samp>](## "tenants.[].point_to_point_services") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- endpoints</samp>](## "tenants.[].point_to_point_services.[].endpoints") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].id") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interfaces</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].interfaces") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].interfaces.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodes</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].nodes") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].nodes.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port_channel</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].port_channel") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].port_channel.mode") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;short_esi</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].port_channel.short_esi") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lldp_disable</samp>](## "tenants.[].point_to_point_services.[].lldp_disable") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</samp>](## "tenants.[].point_to_point_services.[].name") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subinterfaces</samp>](## "tenants.[].point_to_point_services.[].subinterfaces") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- number</samp>](## "tenants.[].point_to_point_services.[].subinterfaces.[].number") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</samp>](## "tenants.[].point_to_point_services.[].type") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;pseudowire_rt_base</samp>](## "tenants.[].pseudowire_rt_base") | Integer |  |  |  |  |
+
+### YAML
+
+```yaml
+tenants:
+  - name: <str>
+    point_to_point_services:
+      - endpoints:
+          - id: <int>
+            interfaces:
+              - <str>
+            nodes:
+              - <str>
+            port_channel:
+              mode: <str>
+              short_esi: <str>
+        lldp_disable: <bool>
+        name: <str>
+        subinterfaces:
+          - number: <str>
+        type: <str>
+    pseudowire_rt_base: <int>
+```
+
 ## Trunk Group Names
 
 ### Variables

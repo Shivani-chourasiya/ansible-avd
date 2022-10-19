@@ -1165,6 +1165,55 @@ keys:
       role interface tests. Again, this is only an issue if `eos_config_deploy_cvp`
       is used and the devices are not present in the network.'
     type: bool
+  tenants:
+    items:
+      keys:
+        name:
+          type: str
+        point_to_point_services:
+          items:
+            keys:
+              endpoints:
+                items:
+                  keys:
+                    id:
+                      type: int
+                    interfaces:
+                      items:
+                        type: str
+                      type: list
+                    nodes:
+                      items:
+                        type: str
+                      type: list
+                    port_channel:
+                      keys:
+                        mode:
+                          type: str
+                        short_esi:
+                          type: str
+                      type: dict
+                  type: dict
+                type: list
+              lldp_disable:
+                type: bool
+              name:
+                type: str
+              subinterfaces:
+                items:
+                  keys:
+                    number:
+                      type: str
+                  type: dict
+                type: list
+              type:
+                type: str
+            type: dict
+          type: list
+        pseudowire_rt_base:
+          type: int
+      type: dict
+    type: list
   trunk_groups:
     display_name: Trunk Group Names
     keys:

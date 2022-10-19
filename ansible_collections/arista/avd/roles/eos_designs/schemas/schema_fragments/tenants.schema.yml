@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../../../plugins/plugin_utils/schema/avd_meta_schema.json
+# Line above is used by RedHat's YAML Schema vscode extension
+# Use Ctrl + Space to get suggestions for every field. Autocomplete will pop up after typing 2 letters.
+type: dict
+keys:
+  tenants:
+    type: list
+    items:
+      type: dict
+      keys:
+        name:
+          type: str
+        pseudowire_rt_base:
+          type: int
+        point_to_point_services:
+          type: list
+          items:
+            type: dict
+            keys:
+              name:
+                type: str
+              type:
+                type: str
+              subinterfaces:
+                type: list
+                items:
+                  type: dict
+                  keys:
+                    number:
+                      type: str
+              endpoints:
+                type: list
+                items:
+                  type: dict
+                  keys:
+                    id:
+                      type: int
+                    nodes:
+                      type: list
+                      items:
+                        type: str
+                    interfaces:
+                      type: list
+                      items:
+                        type: str
+                    port_channel:
+                      type: dict
+                      keys:
+                        mode:
+                          type: str
+                        short_esi:
+                          type: str
+              lldp_disable:
+                type: bool

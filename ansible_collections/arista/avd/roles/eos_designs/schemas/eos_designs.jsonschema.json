@@ -564,6 +564,103 @@
       "type": "boolean",
       "title": "Shutdown Interfaces Towards Undeployed Peers"
     },
+    "tenants": {
+      "items": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "point_to_point_services": {
+            "items": {
+              "properties": {
+                "endpoints": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "title": "Id"
+                      },
+                      "interfaces": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Interfaces"
+                      },
+                      "nodes": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Nodes"
+                      },
+                      "port_channel": {
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "title": "Mode"
+                          },
+                          "short_esi": {
+                            "type": "string",
+                            "title": "Short Esi"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "type": "object",
+                        "title": "Port Channel"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Endpoints"
+                },
+                "lldp_disable": {
+                  "type": "boolean",
+                  "title": "Lldp Disable"
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name"
+                },
+                "subinterfaces": {
+                  "items": {
+                    "properties": {
+                      "number": {
+                        "type": "string",
+                        "title": "Number"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Subinterfaces"
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type"
+                }
+              },
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Point To Point Services"
+          },
+          "pseudowire_rt_base": {
+            "type": "integer",
+            "title": "Pseudowire Rt Base"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Tenants"
+    },
     "trunk_groups": {
       "title": "Trunk Group Names",
       "properties": {

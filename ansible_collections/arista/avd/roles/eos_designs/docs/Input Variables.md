@@ -133,6 +133,25 @@ bgp_peer_groups:
     password: <str>
 ```
 
+## DC Name
+
+### Description
+
+Optional DC Name, only used in SNMP location and Fabric Documentation.
+Recommended to be common between all devices within a Site
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>dc_name</samp>](## "dc_name") | String |  |  |  | DC Name |
+
+### YAML
+
+```yaml
+dc_name: <str>
+```
+
 ## Default IGMP Snooping enabled
 
 ### Description
@@ -350,6 +369,23 @@ Enable vlan aware bundles for EVPN MAC-VRF
 
 ```yaml
 evpn_vlan_aware_bundles: <bool>
+```
+
+## Fabric Name
+
+### Description
+
+Fabric Name, required to match Ansible Group name covering all devices in the Fabric
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>fabric_name</samp>](## "fabric_name") | String | Required |  |  | Fabric Name |
+
+### YAML
+
+```yaml
+fabric_name: <str>
 ```
 
 ## IPv4 Network/Mask assigned to Inband Management
@@ -631,6 +667,25 @@ QOS Profile assigned on all infrastructure links
 p2p_uplinks_qos_profile: <str>
 ```
 
+## POD Name
+
+### Description
+
+POD Name, only used in Fabric Documentation | Optional, fallback to dc_name and then to fabric_name.
+Recommended to be common between Spines, Leafs within a POD (One l3ls topology)
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>pod_name</samp>](## "pod_name") | String |  |  |  | POD Name |
+
+### YAML
+
+```yaml
+pod_name: <str>
+```
+
 ## Shutdown Interfaces Towards Undeployed Peers
 
 ### Description
@@ -682,6 +737,20 @@ trunk_groups:
     name: <str>
   uplink:
     name: <str>
+```
+
+## Device Type
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>type</samp>](## "type") | String | Required |  | Valid Values:<br>- <value(s) of node_type_keys.type> | Device Type |
+
+### YAML
+
+```yaml
+type: <str>
 ```
 
 ## Underlay Filter Peer AS

@@ -179,7 +179,11 @@ default_igmp_snooping_enabled: <bool>
 
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
+<<<<<<< HEAD
 | [<samp>design</samp>](## "design") | Dictionary |  |  |  |  |
+=======
+| [<samp>design</samp>](## "design") | Dictionary |  |  |  | AVD Design |
+>>>>>>> 471aac608 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
 | [<samp>&nbsp;&nbsp;type</samp>](## "design.type") | String |  | l3ls-evpn | Valid Values:<br>- l3ls-evpn<br>- mpls | By setting the `design.type` to `mpls`,<br>the default node-types and templates described in these documents will be used.<br> |
 
 ### YAML

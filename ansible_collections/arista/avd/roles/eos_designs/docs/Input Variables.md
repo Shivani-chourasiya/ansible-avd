@@ -399,10 +399,14 @@ Fabric Name, required to match Ansible Group name covering all devices in the Fa
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
 <<<<<<< HEAD
+<<<<<<< HEAD
 | [<samp>fabric_name</samp>](## "fabric_name") | String | Required |  |  | Fabric Name |
 =======
 | [<samp>fabric_name</samp>](## "fabric_name") | String | Required |  |  |  |
 >>>>>>> 6e4e6396f (Feat(eos_designs): Add schema for fabric_topology.md)
+=======
+| [<samp>fabric_name</samp>](## "fabric_name") | String | Required |  |  | Fabric Name |
+>>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
 
 ### YAML
 
@@ -779,10 +783,14 @@ Recommended to be common between Spines, Leafs within a POD (One l3ls topology)
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
 <<<<<<< HEAD
+<<<<<<< HEAD
 | [<samp>pod_name</samp>](## "pod_name") | String |  |  |  | POD Name |
 =======
 | [<samp>pod_name</samp>](## "pod_name") | String |  |  |  |  |
 >>>>>>> 6e4e6396f (Feat(eos_designs): Add schema for fabric_topology.md)
+=======
+| [<samp>pod_name</samp>](## "pod_name") | String |  |  |  | POD Name |
+>>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
 
 ### YAML
 
@@ -850,10 +858,14 @@ trunk_groups:
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
 <<<<<<< HEAD
+<<<<<<< HEAD
 | [<samp>type</samp>](## "type") | String | Required |  | Valid Values:<br>- <value(s) of node_type_keys.type> | Device Type |
 =======
 | [<samp>type</samp>](## "type") | String | Required |  | Valid Values:<br>- <value(s) of node_type_keys.type> |  |
 >>>>>>> 6e4e6396f (Feat(eos_designs): Add schema for fabric_topology.md)
+=======
+| [<samp>type</samp>](## "type") | String | Required |  | Valid Values:<br>- <value(s) of node_type_keys.type> | Device Type |
+>>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
 
 ### YAML
 

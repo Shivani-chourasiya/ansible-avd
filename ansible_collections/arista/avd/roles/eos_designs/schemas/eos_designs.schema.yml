@@ -729,6 +729,22 @@ keys:
       '
     display_name: Default IGMP Snooping enabled
     type: bool
+  design:
+    display_name: AVD Design
+    keys:
+      type:
+        default: l3ls-evpn
+        description: 'By setting the `design.type` to `mpls`,
+
+          the default node-types and templates described in these documents will be
+          used.
+
+          '
+        type: str
+        valid_values:
+        - l3ls-evpn
+        - mpls
+    type: dict
   enable_trunk_groups:
     default: false
     description: 'Warning: Because of the nature of the EOS Trunk Group feature, enabling

@@ -11,7 +11,7 @@
         "min_rx": {
           "default": 300,
           "type": "integer",
-          "title": "Min Rx"
+          "title": "Min RX"
         },
         "multiplier": {
           "default": 3,
@@ -79,7 +79,7 @@
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Ipv4 Underlay Peers"
+          "title": "IPv4 Underlay Peers"
         },
         "MLAG_IPv4_UNDERLAY_PEER": {
           "properties": {
@@ -95,7 +95,7 @@
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Mlag Ipv4 Underlay Peer"
+          "title": "MLAG IPv4 Underlay Peer"
         },
         "evpn_overlay_core": {
           "properties": {
@@ -143,7 +143,7 @@
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Ipv4 Underlay Peers"
+          "title": "IPv4 Underlay Peers"
         },
         "mlag_ipv4_underlay_peer": {
           "properties": {
@@ -159,7 +159,7 @@
           },
           "additionalProperties": false,
           "type": "object",
-          "title": "Mlag Ipv4 Underlay Peer"
+          "title": "MLAG IPv4 Underlay Peer"
         }
       },
       "additionalProperties": false,

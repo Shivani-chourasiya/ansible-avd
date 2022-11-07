@@ -72,11 +72,7 @@ Maximum Paths for BGP multi-path
 bgp_maximum_paths: <int>
 ```
 
-<<<<<<< HEAD
-## Bgp Mesh Pes
-=======
 ## BGP Mesh Pes
->>>>>>> 719461f3f (Feat(eos_designs): Add schema for eos_designs_fabric_variables_mpls_beta.md)
 
 ### Description
 
@@ -179,11 +175,7 @@ default_igmp_snooping_enabled: <bool>
 
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
-<<<<<<< HEAD
 | [<samp>design</samp>](## "design") | Dictionary |  |  |  |  |
-=======
-| [<samp>design</samp>](## "design") | Dictionary |  |  |  | AVD Design |
->>>>>>> 471aac608 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
 | [<samp>&nbsp;&nbsp;type</samp>](## "design.type") | String |  | l3ls-evpn | Valid Values:<br>- l3ls-evpn<br>- mpls | By setting the `design.type` to `mpls`,<br>the default node-types and templates described in these documents will be used.<br> |
 
 ### YAML
@@ -402,15 +394,7 @@ Fabric Name, required to match Ansible Group name covering all devices in the Fa
 
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
-<<<<<<< HEAD
-<<<<<<< HEAD
-| [<samp>fabric_name</samp>](## "fabric_name") | String | Required |  |  | Fabric Name |
-=======
 | [<samp>fabric_name</samp>](## "fabric_name") | String | Required |  |  |  |
->>>>>>> 6e4e6396f (Feat(eos_designs): Add schema for fabric_topology.md)
-=======
-| [<samp>fabric_name</samp>](## "fabric_name") | String | Required |  |  | Fabric Name |
->>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
 
 ### YAML
 
@@ -786,15 +770,7 @@ Recommended to be common between Spines, Leafs within a POD (One l3ls topology)
 
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
-<<<<<<< HEAD
-<<<<<<< HEAD
-| [<samp>pod_name</samp>](## "pod_name") | String |  |  |  | POD Name |
-=======
 | [<samp>pod_name</samp>](## "pod_name") | String |  |  |  |  |
->>>>>>> 6e4e6396f (Feat(eos_designs): Add schema for fabric_topology.md)
-=======
-| [<samp>pod_name</samp>](## "pod_name") | String |  |  |  | POD Name |
->>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
 
 ### YAML
 
@@ -837,22 +813,22 @@ shutdown_interfaces_towards_undeployed_peers: <bool>
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
 | [<samp>tenants</samp>](## "tenants") | List, items: Dictionary |  |  |  |  |
 | [<samp>&nbsp;&nbsp;- name</samp>](## "tenants.[].name") | String |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;point_to_point_services</samp>](## "tenants.[].point_to_point_services") | List, items: Dictionary |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- endpoints</samp>](## "tenants.[].point_to_point_services.[].endpoints") | List, items: Dictionary |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].id") | Integer |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interfaces</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].interfaces") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;point_to_point_services</samp>](## "tenants.[].point_to_point_services") | List, items: Dictionary |  |  |  | Define point to point services (pseudowires) as a list of dictionaries. |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- endpoints</samp>](## "tenants.[].point_to_point_services.[].endpoints") | List, items: Dictionary |  |  |  | Pseudowire terminating endpoints. |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- id</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].id") | Integer | Required |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interfaces</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].interfaces") | List, items: String |  |  |  | Interfaces patched to the pseudowire on side |
 | [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].interfaces.[].&lt;str&gt;") | String |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodes</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].nodes") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodes</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].nodes") | List, items: String |  |  |  | With ESI multihoming we support 2 nodes per pseudowire endpoint |
 | [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].nodes.[].&lt;str&gt;") | String |  |  |  |  |
 | [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port_channel</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].port_channel") | Dictionary |  |  |  |  |
 | [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].port_channel.mode") | String |  |  |  |  |
 | [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;short_esi</samp>](## "tenants.[].point_to_point_services.[].endpoints.[].port_channel.short_esi") | String |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lldp_disable</samp>](## "tenants.[].point_to_point_services.[].lldp_disable") | Boolean |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</samp>](## "tenants.[].point_to_point_services.[].name") | String |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subinterfaces</samp>](## "tenants.[].point_to_point_services.[].subinterfaces") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lldp_disable</samp>](## "tenants.[].point_to_point_services.[].lldp_disable") | Boolean |  |  |  | Whether to disable lldp rx/tx on port mode pseudowire services |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</samp>](## "tenants.[].point_to_point_services.[].name") | String |  |  |  | L1 service pseudowire name |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subinterfaces</samp>](## "tenants.[].point_to_point_services.[].subinterfaces") | List, items: Dictionary |  |  |  | Subinterfaces will create subinterfaces and additional pseudowires/patch panel config |
 | [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- number</samp>](## "tenants.[].point_to_point_services.[].subinterfaces.[].number") | String |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</samp>](## "tenants.[].point_to_point_services.[].type") | String |  |  |  |  |
-| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;pseudowire_rt_base</samp>](## "tenants.[].pseudowire_rt_base") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</samp>](## "tenants.[].point_to_point_services.[].type") | String |  |  |  | L1 service type, currently only vpws-pseudowire is supported. |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;pseudowire_rt_base</samp>](## "tenants.[].pseudowire_rt_base") | Integer |  |  |  | Pseudowire rt base, used to generate route targets for vpws services. Avoid overlapping route target spaces between different services. |
 
 ### YAML
 
@@ -909,15 +885,7 @@ trunk_groups:
 
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
-<<<<<<< HEAD
-<<<<<<< HEAD
-| [<samp>type</samp>](## "type") | String | Required |  | Valid Values:<br>- <value(s) of node_type_keys.type> | Device Type |
-=======
 | [<samp>type</samp>](## "type") | String | Required |  | Valid Values:<br>- <value(s) of node_type_keys.type> |  |
->>>>>>> 6e4e6396f (Feat(eos_designs): Add schema for fabric_topology.md)
-=======
-| [<samp>type</samp>](## "type") | String | Required |  | Valid Values:<br>- <value(s) of node_type_keys.type> | Device Type |
->>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
 
 ### YAML
 

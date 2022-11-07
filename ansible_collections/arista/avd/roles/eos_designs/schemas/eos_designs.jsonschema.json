@@ -43,11 +43,7 @@
       "default": false,
       "description": "BGP Mesh PES",
       "type": "boolean",
-<<<<<<< HEAD
-      "title": "Bgp Mesh Pes"
-=======
       "title": "BGP Mesh Pes"
->>>>>>> 719461f3f (Feat(eos_designs): Add schema for eos_designs_fabric_variables_mpls_beta.md)
     },
     "bgp_peer_groups": {
       "description": "Leverage an Arista EOS switch to generate the encrypted password using the correct peer group name.\nNote that the name of the peer groups use '-' instead of '_' in EOS configuration.\n",
@@ -572,16 +568,19 @@
             "title": "Name"
           },
           "point_to_point_services": {
+            "description": "Define point to point services (pseudowires) as a list of dictionaries.",
             "items": {
               "properties": {
                 "endpoints": {
+                  "description": "Pseudowire terminating endpoints.",
                   "items": {
                     "properties": {
                       "id": {
                         "type": "integer",
-                        "title": "Id"
+                        "title": "ID"
                       },
                       "interfaces": {
+                        "description": "Interfaces patched to the pseudowire on side",
                         "items": {
                           "type": "string"
                         },
@@ -589,6 +588,7 @@
                         "title": "Interfaces"
                       },
                       "nodes": {
+                        "description": "With ESI multihoming we support 2 nodes per pseudowire endpoint",
                         "items": {
                           "type": "string"
                         },
@@ -611,6 +611,9 @@
                         "title": "Port Channel"
                       }
                     },
+                    "required": [
+                      "id"
+                    ],
                     "additionalProperties": false,
                     "type": "object"
                   },
@@ -618,14 +621,17 @@
                   "title": "Endpoints"
                 },
                 "lldp_disable": {
+                  "description": "Whether to disable lldp rx/tx on port mode pseudowire services",
                   "type": "boolean",
-                  "title": "Lldp Disable"
+                  "title": "LLDP Disable"
                 },
                 "name": {
+                  "description": "L1 service pseudowire name",
                   "type": "string",
                   "title": "Name"
                 },
                 "subinterfaces": {
+                  "description": "Subinterfaces will create subinterfaces and additional pseudowires/patch panel config",
                   "items": {
                     "properties": {
                       "number": {
@@ -640,6 +646,7 @@
                   "title": "Subinterfaces"
                 },
                 "type": {
+                  "description": "L1 service type, currently only vpws-pseudowire is supported.",
                   "type": "string",
                   "title": "Type"
                 }
@@ -651,6 +658,7 @@
             "title": "Point To Point Services"
           },
           "pseudowire_rt_base": {
+            "description": "Pseudowire rt base, used to generate route targets for vpws services. Avoid overlapping route target spaces between different services.",
             "type": "integer",
             "title": "Pseudowire Rt Base"
           }

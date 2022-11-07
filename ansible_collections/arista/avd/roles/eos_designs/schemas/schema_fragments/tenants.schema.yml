@@ -12,17 +12,22 @@ keys:
           type: str
         pseudowire_rt_base:
           type: int
+          description: Pseudowire rt base, used to generate route targets for vpws services. Avoid overlapping route target spaces between different services.
         point_to_point_services:
           type: list
+          description: Define point to point services (pseudowires) as a list of dictionaries.
           items:
             type: dict
             keys:
               name:
                 type: str
+                description: L1 service pseudowire name
               type:
                 type: str
+                description: L1 service type, currently only vpws-pseudowire is supported.
               subinterfaces:
                 type: list
+                description: Subinterfaces will create subinterfaces and additional pseudowires/patch panel config
                 items:
                   type: dict
                   keys:
@@ -30,17 +35,21 @@ keys:
                       type: str
               endpoints:
                 type: list
+                description: Pseudowire terminating endpoints.
                 items:
                   type: dict
                   keys:
                     id:
                       type: int
-                    nodes:
+                      required: true
+                    nodes: 
                       type: list
+                      description: With ESI multihoming we support 2 nodes per pseudowire endpoint
                       items:
                         type: str
                     interfaces:
                       type: list
+                      description: Interfaces patched to the pseudowire on side
                       items:
                         type: str
                     port_channel:
@@ -52,3 +61,4 @@ keys:
                           type: str
               lldp_disable:
                 type: bool
+                description: Whether to disable lldp rx/tx on port mode pseudowire services

@@ -583,103 +583,12 @@ keys:
                 type: bool
   daemon_terminattr:
     type: dict
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dc870b4a0 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
-=======
->>>>>>> e77ba41a0 (minor changes)
-=======
-=======
-    display_name: Daemon TerminAttr
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> c784f2972 (minor changes)
->>>>>>> 9e15a912d (minor changes)
-=======
->>>>>>> e547f2882 (minor changes)
-=======
->>>>>>> 989e6ea48 (minor changes)
     description: "You can either provide a list of IPs/FQDNs to target on-premise
       Cloudvision cluster or use DNS name for your Cloudvision as a Service instance.\nStreaming
       to multiple clusters both on-prem and cloud service is supported.\n> Note For
       TerminAttr version recommendation and EOS compatibility matrix, please refer
       to the latest TerminAttr Release Notes\n  which always contain the latest recommended
       versions and minimum required versions per EOS release.\n"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    display_name: Daemon TerminAttr
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    display_name: Daemon TerminAttr
->>>>>>> 471aac608 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
-=======
-    display_name: Daemon TerminAttr
->>>>>>> 89a1fd8df (Feat(eos_designs): Add schema for eos_designs_fabric_variables_mpls_beta.md)
-=======
->>>>>>> dc870b4a0 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
-=======
->>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
-=======
->>>>>>> 471aac608 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
-    description: "You can either provide a list of IPs/FQDNs to target on-premise\
-      \ Cloudvision cluster or use DNS name for your Cloudvision as a Service instance.\n\
-      Streaming to multiple clusters both on-prem and cloud service is supported.\n\
-      > Note For TerminAttr version recommendation and EOS compatibility matrix, please\
-      \ refer to the latest TerminAttr Release Notes\n  which always contain the latest\
-      \ recommended versions and minimum required versions per EOS release.\n"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
-=======
-=======
->>>>>>> 989e6ea48 (minor changes)
-=======
->>>>>>> c784f2972 (minor changes)
-    description: "You can either provide a list of IPs/FQDNs to target on-premise
-      Cloudvision cluster or use DNS name for your Cloudvision as a Service instance.\nStreaming
-      to multiple clusters both on-prem and cloud service is supported.\n> Note For
-      TerminAttr version recommendation and EOS compatibility matrix, please refer
-      to the latest TerminAttr Release Notes\n  which always contain the latest recommended
-      versions and minimum required versions per EOS release.\n"
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> e547f2882 (minor changes)
-=======
->>>>>>> 471aac608 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
-=======
->>>>>>> 989e6ea48 (minor changes)
-=======
->>>>>>> 89a1fd8df (Feat(eos_designs): Add schema for eos_designs_fabric_variables_mpls_beta.md)
-=======
->>>>>>> c784f2972 (minor changes)
-=======
->>>>>>> 471aac608 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
->>>>>>> dc870b4a0 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
-=======
->>>>>>> e77ba41a0 (minor changes)
-=======
->>>>>>> 552e725d6 (Feat(eos_designs): Add schema for fabric_topology.md)
-=======
->>>>>>> e547f2882 (minor changes)
-=======
->>>>>>> 471aac608 (Feat(eos_designs): Add schema for fabric_topology_mpls_beta.md)
-=======
->>>>>>> 989e6ea48 (minor changes)
     keys:
       cvaddrs:
         type: list

@@ -42,7 +42,7 @@ keys:
                     id:
                       type: int
                       required: true
-                    nodes: 
+                    nodes:
                       type: list
                       description: With ESI multihoming we support 2 nodes per pseudowire endpoint
                       items:

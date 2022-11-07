@@ -804,6 +804,115 @@
       "type": "object",
       "title": "Snmp Settings"
     },
+    "tenants": {
+      "items": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "point_to_point_services": {
+            "description": "Define point to point services (pseudowires) as a list of dictionaries.",
+            "items": {
+              "properties": {
+                "endpoints": {
+                  "description": "Pseudowire terminating endpoints.",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "title": "ID"
+                      },
+                      "interfaces": {
+                        "description": "Interfaces patched to the pseudowire on side",
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Interfaces"
+                      },
+                      "nodes": {
+                        "description": "With ESI multihoming we support 2 nodes per pseudowire endpoint",
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Nodes"
+                      },
+                      "port_channel": {
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "title": "Mode"
+                          },
+                          "short_esi": {
+                            "type": "string",
+                            "title": "Short Esi"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "type": "object",
+                        "title": "Port Channel"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Endpoints"
+                },
+                "lldp_disable": {
+                  "description": "Whether to disable lldp rx/tx on port mode pseudowire services",
+                  "type": "boolean",
+                  "title": "LLDP Disable"
+                },
+                "name": {
+                  "description": "L1 service pseudowire name",
+                  "type": "string",
+                  "title": "Name"
+                },
+                "subinterfaces": {
+                  "description": "Subinterfaces will create subinterfaces and additional pseudowires/patch panel config",
+                  "items": {
+                    "properties": {
+                      "number": {
+                        "type": "string",
+                        "title": "Number"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Subinterfaces"
+                },
+                "type": {
+                  "description": "L1 service type, currently only vpws-pseudowire is supported.",
+                  "type": "string",
+                  "title": "Type"
+                }
+              },
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Point To Point Services"
+          },
+          "pseudowire_rt_base": {
+            "description": "Pseudowire rt base, used to generate route targets for vpws services. Avoid overlapping route target spaces between different services.",
+            "type": "integer",
+            "title": "Pseudowire Rt Base"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Tenants"
+    },
     "terminattr_disable_aaa": {
       "default": false,
       "type": "boolean",

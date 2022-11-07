@@ -1165,6 +1165,69 @@ keys:
       role interface tests. Again, this is only an issue if `eos_config_deploy_cvp`
       is used and the devices are not present in the network.'
     type: bool
+  tenants:
+    items:
+      keys:
+        name:
+          type: str
+        point_to_point_services:
+          description: Define point to point services (pseudowires) as a list of dictionaries.
+          items:
+            keys:
+              endpoints:
+                description: Pseudowire terminating endpoints.
+                items:
+                  keys:
+                    id:
+                      required: true
+                      type: int
+                    interfaces:
+                      description: Interfaces patched to the pseudowire on side
+                      items:
+                        type: str
+                      type: list
+                    nodes:
+                      description: With ESI multihoming we support 2 nodes per pseudowire
+                        endpoint
+                      items:
+                        type: str
+                      type: list
+                    port_channel:
+                      keys:
+                        mode:
+                          type: str
+                        short_esi:
+                          type: str
+                      type: dict
+                  type: dict
+                type: list
+              lldp_disable:
+                description: Whether to disable lldp rx/tx on port mode pseudowire
+                  services
+                type: bool
+              name:
+                description: L1 service pseudowire name
+                type: str
+              subinterfaces:
+                description: Subinterfaces will create subinterfaces and additional
+                  pseudowires/patch panel config
+                items:
+                  keys:
+                    number:
+                      type: str
+                  type: dict
+                type: list
+              type:
+                description: L1 service type, currently only vpws-pseudowire is supported.
+                type: str
+            type: dict
+          type: list
+        pseudowire_rt_base:
+          description: Pseudowire rt base, used to generate route targets for vpws
+            services. Avoid overlapping route target spaces between different services.
+          type: int
+      type: dict
+    type: list
   trunk_groups:
     display_name: Trunk Group Names
     keys:

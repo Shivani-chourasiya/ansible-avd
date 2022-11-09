@@ -194,6 +194,15 @@ def _convert_types(validator, convert_types: list, instance, schema: dict):
                     converted_instance = instance
                     pass
                 return converted_instance
+            elif convert_type == "str" and schema_type == "list":
+                try:
+                    converted_instance = instance.split(",")
+                except Exception:
+                    # Ignore errors and return original
+                    converted_instance = instance
+                    pass
+                return converted_instance
+
     return instance
 
 

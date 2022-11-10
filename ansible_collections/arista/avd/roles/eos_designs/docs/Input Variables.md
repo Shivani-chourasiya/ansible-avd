@@ -1,7 +1,7 @@
 !!! warning
     This document describes the data model for AVD 4.x. It may or may not work in previous versions.
 
-## BFD Multihop tuning
+## BFD Multihop
 
 ### Variables
 
@@ -21,7 +21,7 @@ bfd_multihop:
   multiplier: <int>
 ```
 
-## BGP AS
+## BGP As
 
 ### Description
 
@@ -38,7 +38,7 @@ AS number to use to configure overlay when "overlay_routing_protocol" == IBGP
 bgp_as: <str>
 ```
 
-## BGP ECMP
+## BGP Ecmp
 
 ### Description
 
@@ -89,7 +89,7 @@ BGP Mesh PES
 bgp_mesh_pes: <bool>
 ```
 
-## BGP peer group names and encrypted password
+## BGP Peer Groups
 
 ### Description
 
@@ -190,7 +190,7 @@ By default Lists are replaced and Dictionaries are updated. The combine is done 
 custom_structured_configuration_prefix:
 ```
 
-## Default IGMP Snooping enabled
+## Default IGMP Snooping Enabled
 
 ### Description
 
@@ -209,7 +209,7 @@ If set, it overrides per vlan settings
 default_igmp_snooping_enabled: <bool>
 ```
 
-## AVD Design
+## Design
 
 ### Variables
 
@@ -246,7 +246,7 @@ See "Details on enable_trunk_groups" below before enabling this feature
 enable_trunk_groups: <bool>
 ```
 
-## EVPN Gateway EBGP Multihop
+## Evpn Ebgp Gateway Multihop
 
 ### Description
 
@@ -265,7 +265,7 @@ Adapt the value for your specific topology.
 evpn_ebgp_gateway_multihop: <int>
 ```
 
-## EVPN EBGP Multihop
+## Evpn Ebgp Multihop
 
 ### Description
 
@@ -284,7 +284,7 @@ Set to a higher value to allow for very large and complex topologies.
 evpn_ebgp_multihop: <int>
 ```
 
-## EVPN Host Flapping Settings
+## Evpn Hostflap Detection
 
 ### Variables
 
@@ -306,7 +306,7 @@ evpn_hostflap_detection:
   window: <int>
 ```
 
-## EVPN Import Pruning
+## Evpn Import Pruning
 
 ### Description
 
@@ -327,7 +327,7 @@ the path will be immediately discarded
 evpn_import_pruning: <bool>
 ```
 
-## Enable Fabric to support EVPN Multicast
+## Evpn Multicast
 
 ### Description
 
@@ -352,7 +352,7 @@ Warning !!! For Trident3 based platforms i.e 7050X3, 7300X3, 720XP and 722XP
 evpn_multicast: <bool>
 ```
 
-## EVPN Overlay BGP RTC
+## Evpn Overlay BGP Rtc
 
 ### Description
 
@@ -371,7 +371,7 @@ Requires use eBGP as overlay protocol.
 evpn_overlay_bgp_rtc: <bool>
 ```
 
-## EVPN Prevent Readvertise to Server
+## Evpn Prevent Readvertise To Server
 
 ### Description
 
@@ -391,7 +391,7 @@ from Route-server-1 to Router-server-2 just for Route-server-2 to throw them awa
 evpn_prevent_readvertise_to_server: <bool>
 ```
 
-## EVPN Short ESI Prefix
+## Evpn Short Esi Prefix
 
 ### Description
 
@@ -408,7 +408,7 @@ Configure prefix for "short_esi" values
 evpn_short_esi_prefix: <str>
 ```
 
-## EVPN VLAN-Aware Bundles
+## Evpn VLAN Aware Bundles
 
 ### Description
 
@@ -442,7 +442,7 @@ Fabric Name, required to match Ansible Group name covering all devices in the Fa
 fabric_name: <str>
 ```
 
-## IPv4 Network/Mask assigned to Inband Management
+## Inband Management Subnet
 
 ### Description
 
@@ -499,7 +499,7 @@ inband_management_vlan: <int>
 isis_advertise_passive_only: <bool>
 ```
 
-## Underlay ISIS Area
+## ISIS Area ID
 
 ### Description
 
@@ -530,7 +530,7 @@ isis_area_id: <str>
 isis_default_is_type: <str>
 ```
 
-## ISIS TI-LFA
+## ISIS TI LFA
 
 ### Variables
 
@@ -669,7 +669,7 @@ node_type_keys:
     vtep: <bool>
 ```
 
-## Only Configure VLAN Trunk Groups used by local endpoints
+## Only Local VLAN Trunk Groups
 
 ### Description
 
@@ -691,7 +691,7 @@ Requires "enable_trunk_groups: true"
 only_local_vlan_trunk_groups: <bool>
 ```
 
-## Overlay Her Flood List Per VNI
+## Overlay Her Flood List Per Vni
 
 ### Description
 
@@ -712,7 +712,7 @@ configured VLANs per VTEP, and only include the relevant VTEPs to each VNI's flo
 overlay_her_flood_list_per_vni: <bool>
 ```
 
-## Overlay HER Flood List Scope
+## Overlay Her Flood List Scope
 
 ### Description
 
@@ -751,7 +751,7 @@ Customizable overlay loopback description
 overlay_loopback_description: <str>
 ```
 
-## Enable RFC 5549(iBGP)
+## Overlay MLAG Rfc5549
 
 ### Description
 
@@ -809,7 +809,7 @@ This feature depends on underlay_ipv6 variable. As of today, only RFC5549 is cap
 overlay_routing_protocol_address_family: <str>
 ```
 
-## Point to Point Links MTU
+## P2P Uplinks MTU
 
 ### Variables
 
@@ -823,7 +823,7 @@ overlay_routing_protocol_address_family: <str>
 p2p_uplinks_mtu: <int>
 ```
 
-## P2P Uplinks QoS Profile
+## P2P Uplinks QOS Profile
 
 ### Description
 
@@ -840,7 +840,7 @@ QOS Profile assigned on all infrastructure links
 p2p_uplinks_qos_profile: <str>
 ```
 
-## POD Name
+## Pod Name
 
 ### Description
 
@@ -886,7 +886,7 @@ is_deployed: < true | false | default -> true >
 shutdown_interfaces_towards_undeployed_peers: <bool>
 ```
 
-## Trunk Group Names
+## Trunk Groups
 
 ### Variables
 
@@ -912,7 +912,7 @@ trunk_groups:
     name: <str>
 ```
 
-## Device Type
+## Type
 
 ### Variables
 
@@ -926,7 +926,7 @@ trunk_groups:
 type: <str>
 ```
 
-## Underlay Filter Peer AS
+## Underlay Filter Peer As
 
 ### Description
 
@@ -947,7 +947,7 @@ Note this key is ignored when EVPN is configured.
 underlay_filter_peer_as: <str>
 ```
 
-## Enable IPv6 Address Family on underlay
+## Underlay IPv6
 
 ### Description
 
@@ -1015,7 +1015,7 @@ underlay_multicast: <bool>
 underlay_ospf_area: <str>
 ```
 
-## Enable Underlay OSPF BFD
+## Underlay OSPF BFD Enable
 
 ### Variables
 
@@ -1057,7 +1057,7 @@ underlay_ospf_max_lsa: <int>
 underlay_ospf_process_id: <int>
 ```
 
-## Enable RFC5549 in Underlay
+## Underlay Rfc5549
 
 ### Description
 
@@ -1104,7 +1104,7 @@ underlay_rfc5549: <bool>
 underlay_routing_protocol: <str>
 ```
 
-## Uplink PTP
+## Uplink Ptp
 
 ### Description
 
@@ -1123,7 +1123,7 @@ uplink_ptp:
   enable: <bool>
 ```
 
-## Virtual VTEP IP
+## Vtep Vvtep IP
 
 ### Description
 

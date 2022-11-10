@@ -1158,6 +1158,8 @@ keys:
           type: dict
         tcam_profile:
           type: str
+        trident_forwarding_table_partition:
+          type: str
       type: dict
     type: list
   platform_speed_groups:
@@ -1165,19 +1167,20 @@ keys:
     items:
       keys:
         platform:
-          keys:
-            speeds:
-              items:
-                keys:
-                  speed:
-                    type: str
-                  speed_groups:
-                    items:
-                      type: str
-                    type: list
-                type: dict
-              type: list
-          type: dict
+          type: str
+        speeds:
+          items:
+            keys:
+              speed:
+                type: str
+              speed_groups:
+                items:
+                  convert_types:
+                  - str
+                  type: int
+                type: list
+            type: dict
+          type: list
       type: dict
     type: list
   pod_name:

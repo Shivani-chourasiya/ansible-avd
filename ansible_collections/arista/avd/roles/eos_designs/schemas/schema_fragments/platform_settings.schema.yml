@@ -12,6 +12,8 @@ keys:
           type: list
           items:
             type: str
+        trident_forwarding_table_partition:
+          type: str    
         reload_delay:
           type: dict
           keys:

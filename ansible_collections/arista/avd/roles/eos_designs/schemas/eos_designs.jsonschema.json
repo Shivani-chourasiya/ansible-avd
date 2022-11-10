@@ -608,6 +608,10 @@
           "tcam_profile": {
             "type": "string",
             "title": "TCAM Profile"
+          },
+          "trident_forwarding_table_partition": {
+            "type": "string",
+            "title": "Trident Forwarding Table Partition"
           }
         },
         "additionalProperties": false,
@@ -621,32 +625,29 @@
       "items": {
         "properties": {
           "platform": {
-            "properties": {
-              "speeds": {
-                "items": {
-                  "properties": {
-                    "speed": {
-                      "type": "string",
-                      "title": "Speed"
-                    },
-                    "speed_groups": {
-                      "items": {
-                        "type": "string"
-                      },
-                      "type": "array",
-                      "title": "Speed Groups"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "type": "object"
-                },
-                "type": "array",
-                "title": "Speeds"
-              }
-            },
-            "additionalProperties": false,
-            "type": "object",
+            "type": "string",
             "title": "Platform"
+          },
+          "speeds": {
+            "items": {
+              "properties": {
+                "speed": {
+                  "type": "string",
+                  "title": "Speed"
+                },
+                "speed_groups": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array",
+                  "title": "Speed Groups"
+                }
+              },
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Speeds"
           }
         },
         "additionalProperties": false,

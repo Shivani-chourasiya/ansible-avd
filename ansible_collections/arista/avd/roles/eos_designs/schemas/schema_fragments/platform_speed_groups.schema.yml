@@ -10,16 +10,17 @@ keys:
       type: dict
       keys:
         platform:
-          type: dict
-          keys:
-            speeds:
-              type: list
-              items:
-                type: dict
-                keys:
-                  speed:
-                    type: str
-                  speed_groups:
-                    type: list
-                    items:
-                      type: str
+          type: str
+        speeds:
+          type: list
+          items:
+            type: dict
+            keys:
+              speed:
+                type: str
+              speed_groups:
+                type: list
+                items:
+                  type: int
+                  convert_types:
+                  - str

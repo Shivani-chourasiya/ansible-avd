@@ -588,6 +588,31 @@ VLAN number assigned to Inband Management SVI on l2leafs in default VRF.
 inband_management_vlan: <int>
 ```
 
+## Internal VLAN Order
+
+### Description
+
+Internal vlan allocation order and range | Required
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>internal_vlan_order</samp>](## "internal_vlan_order") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;allocation</samp>](## "internal_vlan_order.allocation") | String |  | ascending | Valid Values:<br>- ascending<br>- descending |  |
+| [<samp>&nbsp;&nbsp;range</samp>](## "internal_vlan_order.range") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;beginning</samp>](## "internal_vlan_order.range.beginning") | Integer |  | 1006 |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;ending</samp>](## "internal_vlan_order.range.ending") | Integer |  | 1199 |  |  |
+
+### YAML
+
+```yaml
+internal_vlan_order:
+  allocation: <str>
+  range:
+    beginning: <int>
+    ending: <int>
+```
+
 ## ISIS Advertise Passive Only
 
 ### Variables
@@ -677,6 +702,27 @@ local_users:
     role: <str>
     sha512_password: <str>
     ssh_key: <str>
+```
+
+## MAC Address Table
+
+### Description
+
+MAC address-table aging time | Optional \
+Use to change the EOS default of 300.
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>mac_address_table</samp>](## "mac_address_table") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;aging_time</samp>](## "mac_address_table.aging_time") | Integer |  | 300 |  |  |
+
+### YAML
+
+```yaml
+mac_address_table:
+  aging_time: <int>
 ```
 
 ## Management Eapi
@@ -780,6 +826,29 @@ mgmt_interface_vrf: <str>
 mgmt_vrf_routing: <bool>
 ```
 
+## MLAG Ibgp Peering VRFs
+
+### Description
+
+On mlag leafs, an SVI interface is defined per vrf, to establish iBGP peering. | Required (when mlag leafs in topology) \
+The SVI id will be derived from the base vlan defined: mlag_ibgp_peering_vrfs.base_vlan + (vrf_id or vrf_vni) - 1 \
+Depending on the values of vrf_id / vrf_id it may be required to adjust the base_vlan to avoid overlaps or invalid vlan ids. \
+The SVI ip address derived from mlag_l3_peer_ipv4_pool is re-used across all iBGP peerings.
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>mlag_ibgp_peering_vrfs</samp>](## "mlag_ibgp_peering_vrfs") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;base_vlan</samp>](## "mlag_ibgp_peering_vrfs.base_vlan") | Integer |  | 3000 | Min: 1<br>Max: 4000 |  |
+
+### YAML
+
+```yaml
+mlag_ibgp_peering_vrfs:
+  base_vlan: <int>
+```
+
 ## Name Server
 
 ### Variables
@@ -819,6 +888,28 @@ Only eos_designs name_servers variables
 ```yaml
 name_servers:
   - <str>
+```
+
+## Network Services Keys
+
+### Description
+
+Define network services keys, to define grouping of network services. \
+This provides the ability to define various keys of your choice to better organize/group your data. \
+This should be defined in top level group_var for the fabric.
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>network_services_keys</samp>](## "network_services_keys") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- name</samp>](## "network_services_keys.[].name") | String | Required, Unique |  |  |  |
+
+### YAML
+
+```yaml
+network_services_keys:
+  - name: <str>
 ```
 
 ## Node Type Keys
@@ -1000,6 +1091,28 @@ Requires "underlay_rfc5549: true"
 overlay_mlag_rfc5549: <bool>
 ```
 
+## Overlay Rd Type
+
+### Description
+
+Specify RD type | Optional \
+Route Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default. \
+By configuring overlay_rd_type the Administrator subfield (first part of RD) can be set to other values.
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>overlay_rd_type</samp>](## "overlay_rd_type") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;admin_subfield</samp>](## "overlay_rd_type.admin_subfield") | String |  |  |  | < "vtep_loopback" | "bgp_as" | < IPv4 Address > | <0-65535> | <0-4294967295> | default -> <overlay_loopback_ip> > |
+
+### YAML
+
+```yaml
+overlay_rd_type:
+  admin_subfield: <str>
+```
+
 ## Overlay Routing Protocol
 
 ### Description
@@ -1037,6 +1150,28 @@ This feature depends on underlay_ipv6 variable. As of today, only RFC5549 is cap
 
 ```yaml
 overlay_routing_protocol_address_family: <str>
+```
+
+## Overlay Rt Type
+
+### Description
+
+Specify RT type | Optional \
+Route Target (RT) for L2 / L3 services is set to <vni>:<vni> per default \
+By configuring overlay_rt_type the Administrator subfield (first part of RT) can be set to other values.
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>overlay_rt_type</samp>](## "overlay_rt_type") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;admin_subfield</samp>](## "overlay_rt_type.admin_subfield") | Integer |  |  |  | < "bgp_as" | <0-65535> | <0-4294967295> | default -> <mac_vrf_id> > |
+
+### YAML
+
+```yaml
+overlay_rt_type:
+  admin_subfield: <int>
 ```
 
 ## P2P Uplinks MTU
@@ -1135,6 +1270,55 @@ Set SNMP settings
 snmp_settings:
   contact: <str>
   location: <bool>
+```
+
+## Svi Profiles
+
+### Description
+
+Optional profiles to apply on SVI interfaces \
+Each profile can support all or some of the following keys according to your own needs. \
+Keys are the same used under SVI. \
+Svi_profiles can refer to another svi_profiles to inherit settings in up to two levels (svi->profile->parent_profile).
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>svi_profiles</samp>](## "svi_profiles") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- enabled</samp>](## "svi_profiles.[].enabled") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;igmp_snooping_enabled</samp>](## "svi_profiles.[].igmp_snooping_enabled") | Boolean |  | True |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;ip_address_virtual</samp>](## "svi_profiles.[].ip_address_virtual") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;ip_address_virtual_secondaries</samp>](## "svi_profiles.[].ip_address_virtual_secondaries") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "svi_profiles.[].ip_address_virtual_secondaries.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;ip_helpers</samp>](## "svi_profiles.[].ip_helpers") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ip_helper</samp>](## "svi_profiles.[].ip_helpers.[].ip_helper") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source_interface</samp>](## "svi_profiles.[].ip_helpers.[].source_interface") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source_vrf</samp>](## "svi_profiles.[].ip_helpers.[].source_vrf") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;ip_virtual_router_addresses</samp>](## "svi_profiles.[].ip_virtual_router_addresses") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "svi_profiles.[].ip_virtual_router_addresses.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;mtu</samp>](## "svi_profiles.[].mtu") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;parent_profile</samp>](## "svi_profiles.[].parent_profile") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;profile</samp>](## "svi_profiles.[].profile") | String |  |  |  |  |
+
+### YAML
+
+```yaml
+svi_profiles:
+  - enabled: <bool>
+    igmp_snooping_enabled: <bool>
+    ip_address_virtual: <str>
+    ip_address_virtual_secondaries:
+      - <str>
+    ip_helpers:
+      - ip_helper: <str>
+        source_interface: <str>
+        source_vrf: <str>
+    ip_virtual_router_addresses:
+      - <str>
+    mtu: <int>
+    parent_profile: <str>
+    profile: <str>
 ```
 
 ## TerminAttr Disable AAA

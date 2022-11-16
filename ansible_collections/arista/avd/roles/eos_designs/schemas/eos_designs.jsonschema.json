@@ -388,6 +388,40 @@
       "type": "integer",
       "title": "Inband Management VLAN"
     },
+    "internal_vlan_order": {
+      "description": "Internal vlan allocation order and range | Required",
+      "properties": {
+        "allocation": {
+          "default": "ascending",
+          "type": "string",
+          "enum": [
+            "ascending",
+            "descending"
+          ],
+          "title": "Allocation"
+        },
+        "range": {
+          "properties": {
+            "beginning": {
+              "default": 1006,
+              "type": "integer",
+              "title": "Beginning"
+            },
+            "ending": {
+              "default": 1199,
+              "type": "integer",
+              "title": "Ending"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "title": "Range"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Internal VLAN Order"
+    },
     "isis_advertise_passive_only": {
       "default": false,
       "type": "boolean",
@@ -478,6 +512,19 @@
       "type": "array",
       "title": "Local Users"
     },
+    "mac_address_table": {
+      "description": "MAC address-table aging time | Optional \\\nUse to change the EOS default of 300.\n",
+      "properties": {
+        "aging_time": {
+          "default": 300,
+          "type": "integer",
+          "title": "Aging Time"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "MAC Address Table"
+    },
     "management_eapi": {
       "description": "Default is https management eAPI enabled",
       "properties": {
@@ -528,6 +575,21 @@
       "type": "boolean",
       "title": "Mgmt VRF Routing"
     },
+    "mlag_ibgp_peering_vrfs": {
+      "description": "On mlag leafs, an SVI interface is defined per vrf, to establish iBGP peering. | Required (when mlag leafs in topology) \\\nThe SVI id will be derived from the base vlan defined: mlag_ibgp_peering_vrfs.base_vlan + (vrf_id or vrf_vni) - 1 \\\nDepending on the values of vrf_id / vrf_id it may be required to adjust the base_vlan to avoid overlaps or invalid vlan ids. \\\nThe SVI ip address derived from mlag_l3_peer_ipv4_pool is re-used across all iBGP peerings.\n",
+      "properties": {
+        "base_vlan": {
+          "default": 3000,
+          "maximum": 4000,
+          "minimum": 1,
+          "type": "integer",
+          "title": "Base VLAN"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "MLAG Ibgp Peering VRFs"
+    },
     "name_server": {
       "properties": {
         "nodes": {
@@ -560,6 +622,24 @@
       },
       "type": "array",
       "title": "Name Servers"
+    },
+    "network_services_keys": {
+      "description": "Define network services keys, to define grouping of network services. \\\nThis provides the ability to define various keys of your choice to better organize/group your data. \\\nThis should be defined in top level group_var for the fabric.\n",
+      "items": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ]
+      },
+      "type": "array",
+      "title": "Network Services Keys"
     },
     "node_type_keys": {
       "items": {
@@ -744,6 +824,19 @@
       "type": "boolean",
       "title": "Overlay MLAG Rfc5549"
     },
+    "overlay_rd_type": {
+      "description": "Specify RD type | Optional \\\nRoute Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default. \\\nBy configuring overlay_rd_type the Administrator subfield (first part of RD) can be set to other values.\n",
+      "properties": {
+        "admin_subfield": {
+          "description": "< \"vtep_loopback\" | \"bgp_as\" | < IPv4 Address > | <0-65535> | <0-4294967295> | default -> <overlay_loopback_ip> >",
+          "type": "string",
+          "title": "Admin Subfield"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Overlay Rd Type"
+    },
     "overlay_routing_protocol": {
       "default": "ebgp",
       "description": "- The following overlay routing protocols are supported:\n  - EBGP (default for l3ls-evpn)\n  - IBGP (only with OSPF or ISIS variants in underlay)\n",
@@ -764,6 +857,19 @@
         "ipv6"
       ],
       "title": "Overlay Routing Protocol Address Family"
+    },
+    "overlay_rt_type": {
+      "description": "Specify RT type | Optional \\\nRoute Target (RT) for L2 / L3 services is set to <vni>:<vni> per default \\\nBy configuring overlay_rt_type the Administrator subfield (first part of RT) can be set to other values. \n",
+      "properties": {
+        "admin_subfield": {
+          "description": "< \"bgp_as\" | <0-65535> | <0-4294967295> | default -> <mac_vrf_id> >",
+          "type": "integer",
+          "title": "Admin Subfield"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Overlay Rt Type"
     },
     "p2p_uplinks_mtu": {
       "default": 9000,
@@ -803,6 +909,78 @@
       "additionalProperties": false,
       "type": "object",
       "title": "Snmp Settings"
+    },
+    "svi_profiles": {
+      "description": "Optional profiles to apply on SVI interfaces \\\nEach profile can support all or some of the following keys according to your own needs. \\\nKeys are the same used under SVI. \\\nSvi_profiles can refer to another svi_profiles to inherit settings in up to two levels (svi->profile->parent_profile).  \n",
+      "items": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "igmp_snooping_enabled": {
+            "default": true,
+            "type": "boolean",
+            "title": "IGMP Snooping Enabled"
+          },
+          "ip_address_virtual": {
+            "type": "string",
+            "title": "IP Address Virtual"
+          },
+          "ip_address_virtual_secondaries": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "IP Address Virtual Secondaries"
+          },
+          "ip_helpers": {
+            "items": {
+              "properties": {
+                "ip_helper": {
+                  "type": "string",
+                  "title": "IP Helper"
+                },
+                "source_interface": {
+                  "type": "string",
+                  "title": "Source Interface"
+                },
+                "source_vrf": {
+                  "type": "string",
+                  "title": "Source VRF"
+                }
+              },
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "IP Helpers"
+          },
+          "ip_virtual_router_addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "IP Virtual Router Addresses"
+          },
+          "mtu": {
+            "type": "integer",
+            "title": "MTU"
+          },
+          "parent_profile": {
+            "type": "string",
+            "title": "Parent Profile"
+          },
+          "profile": {
+            "type": "string",
+            "title": "Profile"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Svi Profiles"
     },
     "terminattr_disable_aaa": {
       "default": false,

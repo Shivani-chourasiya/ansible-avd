@@ -9,8 +9,8 @@ keys:
     - dict
     primary_key: name
     description: |
-      Define network services keys, to define grouping of network services. \
-      This provides the ability to define various keys of your choice to better organize/group your data. \
+      Define network services keys, to define grouping of network services.
+      This provides the ability to define various keys of your choice to better organize/group your data.
       This should be defined in top level group_var for the fabric.
     items:
       type: dict

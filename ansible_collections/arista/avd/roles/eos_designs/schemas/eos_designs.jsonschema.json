@@ -389,7 +389,7 @@
       "title": "Inband Management VLAN"
     },
     "internal_vlan_order": {
-      "description": "Internal vlan allocation order and range | Required",
+      "description": "Internal vlan allocation order and range",
       "properties": {
         "allocation": {
           "default": "ascending",
@@ -513,10 +513,11 @@
       "title": "Local Users"
     },
     "mac_address_table": {
-      "description": "MAC address-table aging time | Optional \\\nUse to change the EOS default of 300.\n",
+      "description": "MAC address-table aging time\nUse to change the EOS default of 300.\n",
       "properties": {
         "aging_time": {
           "default": 300,
+          "description": "Time in seconds",
           "type": "integer",
           "title": "Aging Time"
         }
@@ -624,7 +625,7 @@
       "title": "Name Servers"
     },
     "network_services_keys": {
-      "description": "Define network services keys, to define grouping of network services. \\\nThis provides the ability to define various keys of your choice to better organize/group your data. \\\nThis should be defined in top level group_var for the fabric.\n",
+      "description": "Define network services keys, to define grouping of network services.\nThis provides the ability to define various keys of your choice to better organize/group your data.\nThis should be defined in top level group_var for the fabric.\n",
       "items": {
         "properties": {
           "name": {
@@ -825,7 +826,7 @@
       "title": "Overlay MLAG Rfc5549"
     },
     "overlay_rd_type": {
-      "description": "Specify RD type | Optional \\\nRoute Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default. \\\nBy configuring overlay_rd_type the Administrator subfield (first part of RD) can be set to other values.\n",
+      "description": "Specify RD type\nRoute Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default.\nBy configuring overlay_rd_type the Administrator subfield (first part of RD) can be set to other values.\n",
       "properties": {
         "admin_subfield": {
           "description": "< \"vtep_loopback\" | \"bgp_as\" | < IPv4 Address > | <0-65535> | <0-4294967295> | default -> <overlay_loopback_ip> >",
@@ -859,11 +860,11 @@
       "title": "Overlay Routing Protocol Address Family"
     },
     "overlay_rt_type": {
-      "description": "Specify RT type | Optional \\\nRoute Target (RT) for L2 / L3 services is set to <vni>:<vni> per default \\\nBy configuring overlay_rt_type the Administrator subfield (first part of RT) can be set to other values. \n",
+      "description": "Specify RT type\nRoute Target (RT) for L2 / L3 services is set to <vni>:<vni> per default\nBy configuring overlay_rt_type the Administrator subfield (first part of RT) can be set to other values. \n",
       "properties": {
         "admin_subfield": {
           "description": "< \"bgp_as\" | <0-65535> | <0-4294967295> | default -> <mac_vrf_id> >",
-          "type": "integer",
+          "type": "string",
           "title": "Admin Subfield"
         }
       },
@@ -1143,6 +1144,7 @@
   },
   "required": [
     "fabric_name",
+    "internal_vlan_order",
     "type"
   ],
   "additionalProperties": true,

@@ -6,8 +6,8 @@ keys:
   overlay_rd_type:
     type: dict
     description: |
-      Specify RD type | Optional \
-      Route Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default. \
+      Specify RD type
+      Route Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default.
       By configuring overlay_rd_type the Administrator subfield (first part of RD) can be set to other values.
     keys:
       admin_subfield:

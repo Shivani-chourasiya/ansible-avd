@@ -9,7 +9,7 @@ keys:
       Optional profiles to apply on SVI interfaces \
       Each profile can support all or some of the following keys according to your own needs. \
       Keys are the same used under SVI. \
-      Svi_profiles can refer to another svi_profiles to inherit settings in up to two levels (svi->profile->parent_profile).  
+      Svi_profiles can refer to another svi_profiles to inherit settings in up to two levels (svi->profile->parent_profile).
     items:
       type: dict
       keys:

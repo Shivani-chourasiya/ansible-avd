@@ -592,12 +592,12 @@ inband_management_vlan: <int>
 
 ### Description
 
-Internal vlan allocation order and range | Required
+Internal vlan allocation order and range
 ### Variables
 
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
-| [<samp>internal_vlan_order</samp>](## "internal_vlan_order") | Dictionary |  |  |  |  |
+| [<samp>internal_vlan_order</samp>](## "internal_vlan_order") | Dictionary | Required |  |  |  |
 | [<samp>&nbsp;&nbsp;allocation</samp>](## "internal_vlan_order.allocation") | String |  | ascending | Valid Values:<br>- ascending<br>- descending |  |
 | [<samp>&nbsp;&nbsp;range</samp>](## "internal_vlan_order.range") | Dictionary |  |  |  |  |
 | [<samp>&nbsp;&nbsp;&nbsp;&nbsp;beginning</samp>](## "internal_vlan_order.range.beginning") | Integer |  | 1006 |  |  |
@@ -708,7 +708,7 @@ local_users:
 
 ### Description
 
-MAC address-table aging time | Optional \
+MAC address-table aging time
 Use to change the EOS default of 300.
 
 ### Variables
@@ -716,7 +716,7 @@ Use to change the EOS default of 300.
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
 | [<samp>mac_address_table</samp>](## "mac_address_table") | Dictionary |  |  |  |  |
-| [<samp>&nbsp;&nbsp;aging_time</samp>](## "mac_address_table.aging_time") | Integer |  | 300 |  |  |
+| [<samp>&nbsp;&nbsp;aging_time</samp>](## "mac_address_table.aging_time") | Integer |  | 300 |  | Time in seconds |
 
 ### YAML
 
@@ -894,8 +894,8 @@ name_servers:
 
 ### Description
 
-Define network services keys, to define grouping of network services. \
-This provides the ability to define various keys of your choice to better organize/group your data. \
+Define network services keys, to define grouping of network services.
+This provides the ability to define various keys of your choice to better organize/group your data.
 This should be defined in top level group_var for the fabric.
 
 ### Variables
@@ -1095,8 +1095,8 @@ overlay_mlag_rfc5549: <bool>
 
 ### Description
 
-Specify RD type | Optional \
-Route Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default. \
+Specify RD type
+Route Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni> per default.
 By configuring overlay_rd_type the Administrator subfield (first part of RD) can be set to other values.
 
 ### Variables
@@ -1156,8 +1156,8 @@ overlay_routing_protocol_address_family: <str>
 
 ### Description
 
-Specify RT type | Optional \
-Route Target (RT) for L2 / L3 services is set to <vni>:<vni> per default \
+Specify RT type
+Route Target (RT) for L2 / L3 services is set to <vni>:<vni> per default
 By configuring overlay_rt_type the Administrator subfield (first part of RT) can be set to other values.
 
 ### Variables
@@ -1165,13 +1165,13 @@ By configuring overlay_rt_type the Administrator subfield (first part of RT) can
 | Variable | Type | Required | Default | Value Restrictions | Description |
 | -------- | ---- | -------- | ------- | ------------------ | ----------- |
 | [<samp>overlay_rt_type</samp>](## "overlay_rt_type") | Dictionary |  |  |  |  |
-| [<samp>&nbsp;&nbsp;admin_subfield</samp>](## "overlay_rt_type.admin_subfield") | Integer |  |  |  | < "bgp_as" | <0-65535> | <0-4294967295> | default -> <mac_vrf_id> > |
+| [<samp>&nbsp;&nbsp;admin_subfield</samp>](## "overlay_rt_type.admin_subfield") | String |  |  |  | < "bgp_as" | <0-65535> | <0-4294967295> | default -> <mac_vrf_id> > |
 
 ### YAML
 
 ```yaml
 overlay_rt_type:
-  admin_subfield: <int>
+  admin_subfield: <str>
 ```
 
 ## P2P Uplinks MTU

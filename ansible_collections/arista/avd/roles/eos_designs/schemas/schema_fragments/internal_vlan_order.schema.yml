@@ -5,20 +5,25 @@ type: dict
 keys:
   internal_vlan_order:
     type: dict
-    description: Internal vlan allocation order and range | Required
+    description: Internal vlan allocation order and range
+    required: true
     keys:
       allocation:
         type: str
         valid_values:
         - ascending
         - descending
-        default: ascending 
+        default: ascending
       range:
         type: dict
         keys:
           beginning:
             type: int
+            convert_types:
+            - str
             default: 1006
           ending:
             type: int
+            convert_types:
+            - str
             default: 1199

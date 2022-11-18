@@ -933,7 +933,7 @@ keys:
       '
     type: int
   internal_vlan_order:
-    description: Internal vlan allocation order and range | Required
+    description: Internal vlan allocation order and range
     keys:
       allocation:
         default: ascending
@@ -944,12 +944,17 @@ keys:
       range:
         keys:
           beginning:
+            convert_types:
+            - str
             default: 1006
             type: int
           ending:
+            convert_types:
+            - str
             default: 1199
             type: int
         type: dict
+    required: true
     type: dict
   isis_advertise_passive_only:
     default: false
@@ -1016,14 +1021,17 @@ keys:
     primary_key: name
     type: list
   mac_address_table:
-    description: 'MAC address-table aging time | Optional \
+    description: 'MAC address-table aging time
 
       Use to change the EOS default of 300.
 
       '
     keys:
       aging_time:
+        convert_types:
+        - str
         default: 300
+        description: Time in seconds
         type: int
     type: dict
   management_eapi:
@@ -1071,6 +1079,8 @@ keys:
       '
     keys:
       base_vlan:
+        convert_types:
+        - str
         default: 3000
         max: 4000
         min: 1
@@ -1097,10 +1107,9 @@ keys:
     convert_types:
     - dict
     description: 'Define network services keys, to define grouping of network services.
-      \
 
       This provides the ability to define various keys of your choice to better organize/group
-      your data. \
+      your data.
 
       This should be defined in top level group_var for the fabric.
 
@@ -1252,10 +1261,10 @@ keys:
       '
     type: bool
   overlay_rd_type:
-    description: 'Specify RD type | Optional \
+    description: 'Specify RD type
 
       Route Distinguisher (RD) for L2 / L3 services is set to <overlay_loopback>:<vni>
-      per default. \
+      per default.
 
       By configuring overlay_rd_type the Administrator subfield (first part of RD)
       can be set to other values.
@@ -1290,14 +1299,16 @@ keys:
     - ipv4
     - ipv6
   overlay_rt_type:
-    description: "Specify RT type | Optional \\\nRoute Target (RT) for L2 / L3 services
-      is set to <vni>:<vni> per default \\\nBy configuring overlay_rt_type the Administrator
-      subfield (first part of RT) can be set to other values. \n"
+    description: "Specify RT type\nRoute Target (RT) for L2 / L3 services is set to
+      <vni>:<vni> per default\nBy configuring overlay_rt_type the Administrator subfield
+      (first part of RT) can be set to other values. \n"
     keys:
       admin_subfield:
+        convert_types:
+        - int
         description: < "bgp_as" | <0-65535> | <0-4294967295> | default -> <mac_vrf_id>
           >
-        type: int
+        type: str
     type: dict
   p2p_uplinks_mtu:
     convert_types:

@@ -1065,13 +1065,13 @@ keys:
     type: bool
   mlag_ibgp_peering_vrfs:
     description: 'On mlag leafs, an SVI interface is defined per vrf, to establish
-      iBGP peering. | Required (when mlag leafs in topology) \
+      iBGP peering (required when mlag leafs in topology)
 
       The SVI id will be derived from the base vlan defined: mlag_ibgp_peering_vrfs.base_vlan
-      + (vrf_id or vrf_vni) - 1 \
+      + (vrf_id or vrf_vni) - 1
 
       Depending on the values of vrf_id / vrf_id it may be required to adjust the
-      base_vlan to avoid overlaps or invalid vlan ids. \
+      base_vlan to avoid overlaps or invalid vlan ids.
 
       The SVI ip address derived from mlag_l3_peer_ipv4_pool is re-used across all
       iBGP peerings.
@@ -1272,6 +1272,8 @@ keys:
       '
     keys:
       admin_subfield:
+        convert_types:
+        - int
         description: < "vtep_loopback" | "bgp_as" | < IPv4 Address > | <0-65535> |
           <0-4294967295> | default -> <overlay_loopback_ip> >
         type: str
@@ -1299,9 +1301,14 @@ keys:
     - ipv4
     - ipv6
   overlay_rt_type:
-    description: "Specify RT type\nRoute Target (RT) for L2 / L3 services is set to
-      <vni>:<vni> per default\nBy configuring overlay_rt_type the Administrator subfield
-      (first part of RT) can be set to other values. \n"
+    description: 'Specify RT type
+
+      Route Target (RT) for L2 / L3 services is set to <vni>:<vni> per default
+
+      By configuring overlay_rt_type the Administrator subfield (first part of RT)
+      can be set to other values.
+
+      '
     keys:
       admin_subfield:
         convert_types:
@@ -1370,10 +1377,19 @@ keys:
         type: bool
     type: dict
   svi_profiles:
-    description: "Optional profiles to apply on SVI interfaces \\\nEach profile can
-      support all or some of the following keys according to your own needs. \\\nKeys
-      are the same used under SVI. \\\nSvi_profiles can refer to another svi_profiles
-      to inherit settings in up to two levels (svi->profile->parent_profile).  \n"
+    convert_types:
+    - dict
+    description: 'Optional profiles to apply on SVI interfaces
+
+      Each profile can support all or some of the following keys according to your
+      own needs.
+
+      Keys are the same used under SVI.
+
+      Svi_profiles can refer to another svi_profiles to inherit settings in up to
+      two levels (svi->profile->parent_profile).
+
+      '
     items:
       keys:
         enabled:
@@ -1382,33 +1398,86 @@ keys:
           default: true
           type: bool
         ip_address_virtual:
+          description: IPv4_address/Mask
           type: str
         ip_address_virtual_secondaries:
           items:
+            description: IPv4_address/Mask
             type: str
           type: list
         ip_helpers:
           items:
             keys:
               ip_helper:
+                description: IPv4 dhcp server IP
                 type: str
               source_interface:
+                description: Interface name
                 type: str
               source_vrf:
+                description: VRF to originate DHCP relay packets to DHCP server
                 type: str
             type: dict
           type: list
         ip_virtual_router_addresses:
           items:
+            description: IPv4_address/Mask or IPv4_address
             type: str
           type: list
         mtu:
           type: int
+        name:
+          description: VLAN Name
+          type: str
+        nodes:
+          convert_types:
+          - dict
+          items:
+            keys:
+              ip_address:
+                type: str
+              ip_address_virtual_secondaries:
+                description: Should take config from svis[svi].nodes[node]
+                items:
+                  type: str
+                type: list
+              ip_helpers:
+                items:
+                  keys:
+                    ip_helper:
+                      description: IPv4 dhcp server IP
+                      type: str
+                    source_interface:
+                      description: Interface name
+                      type: str
+                    source_vrf:
+                      description: VRF to originate DHCP relay packets to DHCP server
+                      type: str
+                  type: dict
+                type: list
+              ip_virtual_router_addresses:
+                items:
+                  type: str
+                type: list
+              ipv6_address:
+                type: str
+              ipv6_virtual_router_addresses:
+                items:
+                  type: str
+                type: list
+              name:
+                type: str
+            type: dict
+          primary_key: name
+          type: list
         parent_profile:
+          description: SVI profile name
           type: str
         profile:
+          description: Profile name
           type: str
       type: dict
+    primary_key: profile
     type: list
   terminattr_disable_aaa:
     default: false

@@ -5,9 +5,9 @@ type: dict
 keys:
   network_services_keys:
     type: list
+    primary_key: name
     convert_types:
     - dict
-    primary_key: name
     description: |
       Define network services keys, to define grouping of network services.
       This provides the ability to define various keys of your choice to better organize/group your data.

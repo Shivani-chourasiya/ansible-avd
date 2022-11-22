@@ -14,7 +14,8 @@ The **eos_cli_config_gen** role:
 
 Figure 1 below provides a visualization of the roles inputs, and outputs and tasks in order executed by the role.
 
-![Figure 1: Ansible Role eos_cli_config_gen](media/role_eos_cli_config_gen.gif)
+![Figure 1: Ansible Role eos_cli_config_gen](../../docs/_media/eos_cli_config_gen_dark.svg#only-dark)
+![Figure 1: Ansible Role eos_cli_config_gen](../../docs/_media/eos_cli_config_gen_light.svg#only-light)
 
 **Inputs:**
 
@@ -703,6 +704,32 @@ as_path:
           origin: < "any" | "egp" | "igp" | "incomplete" | default -> "any" >
 ```
 
+### Flow Tracking
+
+```yaml
+flow_trackings:
+  # Only 'sampled' is supported for type
+  - type: < "sampled" >
+    sample: < 1-4294967295 >
+    trackers:
+      - name: < tracker_name >
+        record_export:
+          on_inactive_timeout: < 3000-900000 >
+          on_interval: < 1000-36000000 >
+          mpls: < true | false >
+        exporters:
+          - name: < exporter_name >
+            collector:
+              host: < collector_ip_or_hostname >
+              port: < 1-65535 >
+            format:
+              # Note that platforms only support 10 today
+              ipfix_version: < ipfix_version as integer >
+            local_interface: < local_interface_name >
+        template_interval: < 5000-3600000 >
+    shutdown: < true | false >
+```
+
 ### Generate Device Documentation
 
 ```yaml
@@ -807,6 +834,8 @@ ethernet_interfaces:
     type: < routed | switched | l3dot1q | l2dot1q >
     snmp_trap_link_change: < true | false >
     vrf: < vrf_name >
+    flow_tracker:
+        sampled: < flow_tracker_name >
     error_correction_encoding:
       enabled: < true | false | default -> true >
       fire_code: < true | false >
@@ -975,6 +1004,8 @@ ethernet_interfaces:
       - < trunk_group_name_2 >
     l2_protocol:
       encapsulation_dot1q_vlan: < vlan number >
+    flow_tracker:
+        sampled: < flow_tracker_name >
     error_correction_encoding:
       enabled: < true | false | default -> true >
       fire_code: < true | false >
@@ -1202,6 +1233,8 @@ port_channel_interfaces:
       vlan: < 1-4094 >
     l2_protocol:
       encapsulation_dot1q_vlan: < vlan number >
+    flow_tracker:
+        sampled: < flow_tracker_name >
     mtu: < mtu >
     mlag: < mlag_id >
     trunk_groups:
@@ -1995,7 +2028,8 @@ ntp:
   authentication_keys:
     - id: < key_identifier | 1-65534 >
       hash_algorithm: < md5 | sha1 >
-      key: "< type7_obfuscated_key >"
+      key: "< obfuscated_key >"
+      key_type: < 0 | 7 | 8a >
   trusted_keys: "< list of trusted-keys as string ex. 10-12,15 >"
 ```
 

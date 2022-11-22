@@ -279,6 +279,29 @@ If set, it overrides per vlan settings
 default_igmp_snooping_enabled: <bool>
 ```
 
+## Default Node Types
+
+### Description
+
+Uses hostname matches against a regular expression to determine the node type.
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>default_node_types</samp>](## "default_node_types") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- match_hostnames</samp>](## "default_node_types.[].match_hostnames") | List, items: String | Required |  |  | Regular expressions to match against hostnames |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "default_node_types.[].match_hostnames.[].&lt;str&gt;") | String | Required |  |  | Regex needs to match full hostname (i.e. is bounded by ^ and $ elements) |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;node_type</samp>](## "default_node_types.[].node_type") | String | Required, Unique |  |  | Resulting node type when regex matches |
+
+### YAML
+
+```yaml
+default_node_types:
+  - match_hostnames:
+      - <str>
+    node_type: <str>
+```
+
 ## Design
 
 ### Variables
@@ -651,6 +674,70 @@ isis_ti_lfa:
   enabled: <bool>
   local_convergence_delay: <int>
   protection: <str>
+```
+
+## L3 Edge
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>l3_edge</samp>](## "l3_edge") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;p2p_links</samp>](## "l3_edge.p2p_links") | List, items: Dictionary | Required |  |  | Any setting supported under p2p_links can be set and inherited from profile |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;- as</samp>](## "l3_edge.p2p_links.[].as") | List, items: String |  |  |  | AS Numbers for BGP, required with bgp peering |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "l3_edge.p2p_links.[].as.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bfd</samp>](## "l3_edge.p2p_links.[].bfd") | Boolean |  | False |  | Enable BFD (only considered for BGP) |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</samp>](## "l3_edge.p2p_links.[].id") | Integer | Required, Unique |  |  | Unique id per subnet_summary. Used to calculate ip addresses | Required with ip_pool |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include_in_underlay_protocol</samp>](## "l3_edge.p2p_links.[].include_in_underlay_protocol") | Boolean |  | False |  | Add this interface to underlay routing protocol |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interfaces</samp>](## "l3_edge.p2p_links.[].interfaces") | List, items: String |  |  |  | Interfaces where this link should be configured | Required |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "l3_edge.p2p_links.[].interfaces.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip</samp>](## "l3_edge.p2p_links.[].ip") | List, items: String |  |  |  | Specific IP addresses used on this P2P link | Optional (Requires ip_pool or subnet or ip) |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "l3_edge.p2p_links.[].ip.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip_pool</samp>](## "l3_edge.p2p_links.[].ip_pool") | String |  |  |  | IP Pool defined under p2p_links_ip_pools. A /31 will be taken from the pool per P2P link | Optional (Requires ip_pool or subnet or ip) |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;macsec_profile</samp>](## "l3_edge.p2p_links.[].macsec_profile") | String |  |  |  | MAC Security Profile |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mtu</samp>](## "l3_edge.p2p_links.[].mtu") | Integer |  |  |  | MTU for this P2P link |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodes</samp>](## "l3_edge.p2p_links.[].nodes") | List, items: String |  |  |  | Nodes where this link should be configured | Required |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "l3_edge.p2p_links.[].nodes.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;profile</samp>](## "l3_edge.p2p_links.[].profile") | String |  |  |  | Profile defined under p2p_profiles |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ptp_enable</samp>](## "l3_edge.p2p_links.[].ptp_enable") | Boolean |  | False |  | Enable PTP |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qos_profile</samp>](## "l3_edge.p2p_links.[].qos_profile") | String |  |  |  | QOS Service Profile |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speed</samp>](## "l3_edge.p2p_links.[].speed") | String |  |  | Valid Values:<br>- speed<br>- auto speed<br>- forced speed | Speed | Optional |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subnet</samp>](## "l3_edge.p2p_links.[].subnet") | String |  |  |  | Subnet used on this P2P link | Optional (Requires ip_pool or subnet or ip) |
+| [<samp>&nbsp;&nbsp;p2p_links_ip_pools</samp>](## "l3_edge.p2p_links_ip_pools") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;- ipv4_pool</samp>](## "l3_edge.p2p_links_ip_pools.[].ipv4_pool") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</samp>](## "l3_edge.p2p_links_ip_pools.[].name") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;p2p_links_profiles</samp>](## "l3_edge.p2p_links_profiles") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;- name</samp>](## "l3_edge.p2p_links_profiles.[].name") | String |  |  |  |  |
+
+### YAML
+
+```yaml
+l3_edge:
+  p2p_links:
+    - as:
+        - <str>
+      bfd: <bool>
+      id: <int>
+      include_in_underlay_protocol: <bool>
+      interfaces:
+        - <str>
+      ip:
+        - <str>
+      ip_pool: <str>
+      macsec_profile: <str>
+      mtu: <int>
+      nodes:
+        - <str>
+      profile: <str>
+      ptp_enable: <bool>
+      qos_profile: <str>
+      speed: <str>
+      subnet: <str>
+  p2p_links_ip_pools:
+    - ipv4_pool: <str>
+      name: <str>
+  p2p_links_profiles:
+    - name: <str>
 ```
 
 ## Local Users
@@ -1070,6 +1157,73 @@ QOS Profile assigned on all infrastructure links
 p2p_uplinks_qos_profile: <str>
 ```
 
+## Platform Settings
+
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>platform_settings</samp>](## "platform_settings") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- feature_support</samp>](## "platform_settings.[].feature_support") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface_storm_control</samp>](## "platform_settings.[].feature_support.interface_storm_control") | Boolean |  | True |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue_monitor_length_notify</samp>](## "platform_settings.[].feature_support.queue_monitor_length_notify") | Boolean |  | True |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;lag_hardware_only</samp>](## "platform_settings.[].lag_hardware_only") | Boolean |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;management_interface</samp>](## "platform_settings.[].management_interface") | String |  | Management1 |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;platforms</samp>](## "platform_settings.[].platforms") | List, items: String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;str&gt;</samp>](## "platform_settings.[].platforms.[].&lt;str&gt;") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;raw_eos_cli</samp>](## "platform_settings.[].raw_eos_cli") | String |  |  |  | EOS CLI rendered directly on the root level of the final EOS configuration |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;reload_delay</samp>](## "platform_settings.[].reload_delay") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mlag</samp>](## "platform_settings.[].reload_delay.mlag") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non_mlag</samp>](## "platform_settings.[].reload_delay.non_mlag") | Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;tcam_profile</samp>](## "platform_settings.[].tcam_profile") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;trident_forwarding_table_partition</samp>](## "platform_settings.[].trident_forwarding_table_partition") | String |  |  |  | Only applied when evpn_multicast is true |
+
+### YAML
+
+```yaml
+platform_settings:
+  - feature_support:
+      interface_storm_control: <bool>
+      queue_monitor_length_notify: <bool>
+    lag_hardware_only: <bool>
+    management_interface: <str>
+    platforms:
+      - <str>
+    raw_eos_cli: <str>
+    reload_delay:
+      mlag: <int>
+      non_mlag: <int>
+    tcam_profile: <str>
+    trident_forwarding_table_partition: <str>
+```
+
+## Platform Speed Groups
+
+### Description
+
+Set Hardware Speed Groups per Platform
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>platform_speed_groups</samp>](## "platform_speed_groups") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;- platform</samp>](## "platform_speed_groups.[].platform") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;speeds</samp>](## "platform_speed_groups.[].speeds") | List, items: Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- speed</samp>](## "platform_speed_groups.[].speeds.[].speed") | String |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speed_groups</samp>](## "platform_speed_groups.[].speeds.[].speed_groups") | List, items: Integer |  |  |  |  |
+| [<samp>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &lt;int&gt;</samp>](## "platform_speed_groups.[].speeds.[].speed_groups.[].&lt;int&gt;") | Integer |  |  |  |  |
+
+### YAML
+
+```yaml
+platform_speed_groups:
+  - platform: <str>
+    speeds:
+      - speed: <str>
+        speed_groups:
+          - <int>
+```
+
 ## Pod Name
 
 ### Description
@@ -1087,6 +1241,25 @@ Recommended to be common between Spines, Leafs within a POD (One l3ls topology)
 
 ```yaml
 pod_name: <str>
+```
+
+## Redundancy
+
+### Description
+
+Redundancy for chassis platforms with dual supervisors | Optional
+### Variables
+
+| Variable | Type | Required | Default | Value Restrictions | Description |
+| -------- | ---- | -------- | ------- | ------------------ | ----------- |
+| [<samp>redundancy</samp>](## "redundancy") | Dictionary |  |  |  |  |
+| [<samp>&nbsp;&nbsp;protocol</samp>](## "redundancy.protocol") | String |  |  | Valid Values:<br>- sso<br>- rpr |  |
+
+### YAML
+
+```yaml
+redundancy:
+  protocol: <str>
 ```
 
 ## Shutdown Interfaces Towards Undeployed Peers

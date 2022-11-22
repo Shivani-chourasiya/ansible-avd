@@ -216,6 +216,35 @@
       "type": "boolean",
       "title": "Default IGMP Snooping Enabled"
     },
+    "default_node_types": {
+      "description": "Uses hostname matches against a regular expression to determine the node type.",
+      "items": {
+        "properties": {
+          "match_hostnames": {
+            "description": "Regular expressions to match against hostnames",
+            "items": {
+              "description": "Regex needs to match full hostname (i.e. is bounded by ^ and $ elements)",
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Match Hostnames"
+          },
+          "node_type": {
+            "description": "Resulting node type when regex matches",
+            "type": "string",
+            "title": "Node Type"
+          }
+        },
+        "required": [
+          "match_hostnames",
+          "node_type"
+        ],
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Default Node Types"
+    },
     "design": {
       "properties": {
         "type": {
@@ -434,6 +463,157 @@
       "additionalProperties": false,
       "type": "object",
       "title": "ISIS TI LFA"
+    },
+    "l3_edge": {
+      "properties": {
+        "p2p_links": {
+          "description": "Any setting supported under p2p_links can be set and inherited from profile",
+          "items": {
+            "properties": {
+              "as": {
+                "description": "AS Numbers for BGP, required with bgp peering",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "title": "As"
+              },
+              "bfd": {
+                "default": false,
+                "description": "Enable BFD (only considered for BGP)",
+                "type": "boolean",
+                "title": "BFD"
+              },
+              "id": {
+                "description": "Unique id per subnet_summary. Used to calculate ip addresses | Required with ip_pool",
+                "type": "integer",
+                "title": "ID"
+              },
+              "include_in_underlay_protocol": {
+                "default": false,
+                "description": "Add this interface to underlay routing protocol",
+                "type": "boolean",
+                "title": "Include In Underlay Protocol"
+              },
+              "interfaces": {
+                "description": "Interfaces where this link should be configured | Required",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "title": "Interfaces"
+              },
+              "ip": {
+                "description": "Specific IP addresses used on this P2P link | Optional (Requires ip_pool or subnet or ip)",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "title": "IP"
+              },
+              "ip_pool": {
+                "description": "IP Pool defined under p2p_links_ip_pools. A /31 will be taken from the pool per P2P link | Optional (Requires ip_pool or subnet or ip)",
+                "type": "string",
+                "title": "IP Pool"
+              },
+              "macsec_profile": {
+                "description": "MAC Security Profile",
+                "type": "string",
+                "title": "Macsec Profile"
+              },
+              "mtu": {
+                "description": "MTU for this P2P link",
+                "type": "integer",
+                "title": "MTU"
+              },
+              "nodes": {
+                "description": "Nodes where this link should be configured | Required",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "title": "Nodes"
+              },
+              "profile": {
+                "description": "Profile defined under p2p_profiles",
+                "type": "string",
+                "title": "Profile"
+              },
+              "ptp_enable": {
+                "default": false,
+                "description": "Enable PTP",
+                "type": "boolean",
+                "title": "Ptp Enable"
+              },
+              "qos_profile": {
+                "description": "QOS Service Profile",
+                "type": "string",
+                "title": "QOS Profile"
+              },
+              "speed": {
+                "description": "Speed | Optional",
+                "type": "string",
+                "enum": [
+                  "speed",
+                  "auto speed",
+                  "forced speed"
+                ],
+                "title": "Speed"
+              },
+              "subnet": {
+                "description": "Subnet used on this P2P link | Optional (Requires ip_pool or subnet or ip)",
+                "type": "string",
+                "title": "Subnet"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+              "id"
+            ]
+          },
+          "type": "array",
+          "title": "P2P Links"
+        },
+        "p2p_links_ip_pools": {
+          "items": {
+            "properties": {
+              "ipv4_pool": {
+                "type": "string",
+                "title": "IPv4 Pool"
+              },
+              "name": {
+                "type": "string",
+                "title": "Name"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "array",
+          "title": "P2P Links IP Pools"
+        },
+        "p2p_links_profiles": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "Name"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "array",
+          "title": "P2P Links Profiles"
+        }
+      },
+      "required": [
+        "p2p_links"
+      ],
+      "additionalProperties": false,
+      "type": "object",
+      "title": "L3 Edge"
     },
     "local_users": {
       "items": {
@@ -775,10 +955,134 @@
       "type": "string",
       "title": "P2P Uplinks QOS Profile"
     },
+    "platform_settings": {
+      "items": {
+        "properties": {
+          "feature_support": {
+            "properties": {
+              "interface_storm_control": {
+                "default": true,
+                "type": "boolean",
+                "title": "Interface Storm Control"
+              },
+              "queue_monitor_length_notify": {
+                "default": true,
+                "type": "boolean",
+                "title": "Queue Monitor Length Notify"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "title": "Feature Support"
+          },
+          "lag_hardware_only": {
+            "type": "boolean",
+            "title": "LAG Hardware Only"
+          },
+          "management_interface": {
+            "default": "Management1",
+            "type": "string",
+            "title": "Management Interface"
+          },
+          "platforms": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Platforms"
+          },
+          "raw_eos_cli": {
+            "description": "EOS CLI rendered directly on the root level of the final EOS configuration",
+            "type": "string",
+            "title": "Raw EOS CLI"
+          },
+          "reload_delay": {
+            "properties": {
+              "mlag": {
+                "type": "integer",
+                "title": "MLAG"
+              },
+              "non_mlag": {
+                "type": "integer",
+                "title": "Non MLAG"
+              }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "title": "Reload Delay"
+          },
+          "tcam_profile": {
+            "type": "string",
+            "title": "TCAM Profile"
+          },
+          "trident_forwarding_table_partition": {
+            "description": "Only applied when evpn_multicast is true",
+            "type": "string",
+            "title": "Trident Forwarding Table Partition"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Platform Settings"
+    },
+    "platform_speed_groups": {
+      "description": "Set Hardware Speed Groups per Platform",
+      "items": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "speeds": {
+            "items": {
+              "properties": {
+                "speed": {
+                  "type": "string",
+                  "title": "Speed"
+                },
+                "speed_groups": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array",
+                  "title": "Speed Groups"
+                }
+              },
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Speeds"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Platform Speed Groups"
+    },
     "pod_name": {
       "description": "POD Name, only used in Fabric Documentation | Optional, fallback to dc_name and then to fabric_name.\nRecommended to be common between Spines, Leafs within a POD (One l3ls topology)\n",
       "type": "string",
       "title": "Pod Name"
+    },
+    "redundancy": {
+      "description": "Redundancy for chassis platforms with dual supervisors | Optional",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "sso",
+            "rpr"
+          ],
+          "title": "Protocol"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "title": "Redundancy"
     },
     "shutdown_interfaces_towards_undeployed_peers": {
       "default": false,

@@ -725,9 +725,10 @@ keys:
         type: dict
     type: dict
   cvp_ingestauth_key:
-    description: CloudVision Ingest Authentication key is required for on-prem CVP
+    description: CloudVision ingest authentication key is required for on-prem CVP
     type: str
   cvp_instance_ip:
+    description: IPv4 address
     type: str
   cvp_instance_ips:
     description: 'You can either provide a list of IPs to target on-premise CloudVision
@@ -740,11 +741,14 @@ keys:
 
       '
     items:
+      description: IPv4 address or CV as a Service hostname
       type: str
     type: list
   cvp_token_file:
     default: /tmp/cv-onboarding-token
-    description: cvp_token_file is path to token file on switch
+    description: 'cvp_token_file is only applicable to CV as a Service.
+
+      cvp_token_file is path to token file on switch'
     type: str
   default_igmp_snooping_enabled:
     default: true
@@ -790,19 +794,14 @@ keys:
   event_handlers:
     convert_types:
     - dict
-    description: 'Gives ability to monitor and react to Syslog messages provides a
+    description: Gives ability to monitor and react to Syslog messages provides a
       powerful and flexible tool that can be used to apply self-healing actions, customize
       the system behavior, and implement workarounds to problems discovered in the
       field.
-
-      '
-    display_name: Event Handlers
     items:
       keys:
         action:
-          description: 'Command to run when handler is triggered
-
-            '
+          description: Command to run when handler is triggered
           type: str
         action_type:
           type: str
@@ -810,30 +809,23 @@ keys:
           - bash
           - increment
         asynchronous:
-          default: false
           description: Set the action to be non-blocking.
           type: bool
         delay:
           convert_types:
           - str
-          description: 'Event-handler delay in seconds
-
-            '
+          description: Event-handler delay in sec between 2 triggers
           type: int
         name:
-          display_name: Event Handler Name
+          description: Event handler name
           required: true
           type: str
         regex:
-          description: 'Regular expression to use for searching log messages. Required
+          description: Regular expression to use for searching log messages. Required
             for on-logging trigger
-
-            '
           type: str
         trigger:
-          description: 'Configure event trigger condition.
-
-            '
+          description: Configure event trigger condition.
           type: str
           valid_values:
           - on-logging
@@ -1030,43 +1022,40 @@ keys:
     items:
       keys:
         name:
+          description: Username
           required: true
           type: str
         no_password:
-          description: 'If set a password will not be configured for this user. "sha512_password"
+          description: If set a password will not be configured for this user. "sha512_password"
             MUST not be defined for this user.
-
-            '
           type: bool
         privilege:
           convert_types:
           - str
-          description: 'Initial privilege level with local EXEC authorization.
-
-            '
+          description: Initial privilege level with local EXEC authorization.
           max: 15
           min: 1
           type: int
         role:
-          description: 'EOS RBAC Role to be assigned to the user such as "network-admin"
+          description: EOS RBAC Role to be assigned to the user such as "network-admin"
             or "network-operator"
-
-            '
           type: str
         sha512_password:
-          description: 'Must be the hash of the password. By default EOS salts the
+          description: Must be the hash of the password. By default EOS salts the
             password with the username, so the simplest is to generate the hash on
             an EOS device using the same username.
-
-            '
           type: str
         ssh_key:
+          description: SSH key string
           type: str
       type: dict
     primary_key: name
+    required: true
     type: list
   management_eapi:
-    description: 'Default is https management eAPI enabled
+    description: 'Default is https management eAPI enabled.
+
+      The vrf is set to < mgmt_interface_vrf >
 
       '
     keys:
@@ -1080,29 +1069,30 @@ keys:
         type: bool
     type: dict
   mgmt_destination_networks:
-    description: 'OOB mgmt interface destination networks - override default route
-
-      '
+    description: OOB mgmt interface destination networks - override default route
     items:
+      description: IPv4 network/Mask
       type: str
     type: list
   mgmt_gateway:
-    description: Management interface configuration
+    description: IPv4 address. Management interface configuration
     type: str
   mgmt_interface:
     default: Management1
+    description: Management interface
     type: str
   mgmt_interface_vrf:
     default: MGMT
+    description: VRF name
     type: str
   mgmt_vrf_routing:
     default: false
+    description: Management interface configuration
     type: bool
   name_servers:
-    description: 'List of DNS servers
-
-      '
+    description: List of DNS servers. It is optional
     items:
+      description: IPv4 address
       type: str
     type: list
   node_type_keys:
@@ -1322,34 +1312,100 @@ keys:
       is used and the devices are not present in the network.'
     type: bool
   snmp_settings:
-    description: 'Set SNMP settings
-
-      '
+    description: Set SNMP settings. It is optional
     keys:
+      compute_local_engineid:
+        default: false
+        description: 'Generate a local engineId for SNMP by hashing via SHA1 the string
+
+          generated via the concatenation of the hostname plus the management IP.
+
+          {{ inventory_hostname }} + {{ switch.mgmt_ip }}
+
+          '
+        type: bool
+      compute_v3_user_localized_key:
+        default: false
+        description: 'Requires compute_local_engineid to be `true` if enabled, the
+          SNMPv3
+
+          passphrases for auth and priv are transfromed using RFC 2574,
+
+          matching the value they would take in EOS cli the algorithm requires
+
+          a local engineId which is unknown to AVD hence the necessity to generate
+
+          one beforehand.
+
+          '
+        type: bool
       contact:
+        description: Contact info
         type: str
       location:
         default: false
-        description: 'Formatted as: {{ fabric_name }} {{ dc_name }} {{ pod_name }}
-          {{ switch_rack }} {{ inventory_hostname }}'
+        description: Formatted as {{ fabric_name }} {{ dc_name }} {{ pod_name }} {{
+          switch_rack }} {{ inventory_hostname }}
         type: bool
+      users:
+        items:
+          keys:
+            auth:
+              type: str
+              valid_values:
+              - md5
+              - sha
+              - sha256
+              - sha384
+              - sha512
+            auth_passphrase:
+              description: Clear passphrase. Recommended to use vault
+              required: true
+              type: str
+            group:
+              type: str
+            name:
+              description: Username
+              type: str
+            priv:
+              type: str
+              valid_values:
+              - des
+              - aes
+              - aes192
+              - aes256
+            priv_passphrase:
+              description: Clear passphrase. Recommended to use vault
+              required: true
+              type: str
+            version:
+              type: str
+              valid_values:
+              - v1
+              - v2c
+              - v3
+          type: dict
+        type: list
     type: dict
   terminattr_disable_aaa:
     default: false
     type: bool
   terminattr_ingestexclude:
     default: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+    description: Ingest excludes
     type: str
   terminattr_ingestgrpcurl_port:
     convert_types:
     - str
     default: 9910
-    display_name: Ingest gRPC URL Port Number
+    description: Ingest gRPC URL port number
     type: int
   terminattr_smashexcludes:
     default: ale,flexCounter,hardware,kni,pulse,strata
+    description: Smash excludes
     type: str
   timezone:
+    description: Clock timezone. It is Optional
     type: str
   trunk_groups:
     display_name: Trunk Group Names

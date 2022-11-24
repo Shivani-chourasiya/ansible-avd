@@ -5,4 +5,4 @@ type: dict
 keys:
   terminattr_disable_aaa:
     type: bool
-    default: False
+    default: false

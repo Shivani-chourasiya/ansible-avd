@@ -6,3 +6,4 @@ keys:
   terminattr_smashexcludes:
     type: str
     default: "ale,flexCounter,hardware,kni,pulse,strata"
+    description: Smash excludes

@@ -5,3 +5,4 @@ type: dict
 keys:
   cvp_instance_ip:
     type: str
+    description: IPv4 address

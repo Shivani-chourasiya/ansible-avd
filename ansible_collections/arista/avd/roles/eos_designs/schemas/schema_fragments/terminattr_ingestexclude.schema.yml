@@ -6,3 +6,4 @@ keys:
   terminattr_ingestexclude:
     type: str
     default: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
+    description: Ingest excludes

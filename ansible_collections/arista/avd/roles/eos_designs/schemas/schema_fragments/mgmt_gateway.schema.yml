@@ -5,5 +5,4 @@ type: dict
 keys:
   mgmt_gateway:
     type: str
-    description: |
-      Management interface configuration
+    description: IPv4 address. Management interface configuration

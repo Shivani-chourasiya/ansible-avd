@@ -8,40 +8,32 @@ keys:
     primary_key: name
     convert_types:
     - dict
-    display_name: Event Handlers
-    description: |
-      Gives ability to monitor and react to Syslog messages provides a powerful and flexible tool that can be used to apply self-healing actions, customize the system behavior, and implement workarounds to problems discovered in the field.
+    description: Gives ability to monitor and react to Syslog messages provides a powerful and flexible tool that can be used to apply self-healing actions, customize the system behavior, and implement workarounds to problems discovered in the field.
     items:
       type: dict
       keys:
         name:
           type: str
           required: True
-          display_name: Event Handler Name
+          description: Event handler name
         action_type:
           type: str
           valid_values: ["bash", "increment"]
         action:
           type: str
-          description: |
-            Command to run when handler is triggered
+          description: Command to run when handler is triggered
         delay:
           type: int
           convert_types:
           - str
-          description: |
-            Event-handler delay in seconds
+          description: Event-handler delay in sec between 2 triggers
         trigger:
           type: str
-          description: |
-            Configure event trigger condition.
+          description: Configure event trigger condition.
           valid_values: ["on-logging"]
         regex:
           type: str
-          description: |
-            Regular expression to use for searching log messages. Required for on-logging trigger
+          description: Regular expression to use for searching log messages. Required for on-logging trigger
         asynchronous:
           type: bool
-          default: False
-          description: |
-            Set the action to be non-blocking.
+          description: Set the action to be non-blocking.

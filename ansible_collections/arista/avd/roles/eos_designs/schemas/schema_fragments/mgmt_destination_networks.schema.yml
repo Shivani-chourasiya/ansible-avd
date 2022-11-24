@@ -5,7 +5,7 @@ type: dict
 keys:
   mgmt_destination_networks:
     type: list
-    description: |
-      OOB mgmt interface destination networks - override default route
+    description: OOB mgmt interface destination networks - override default route
     items:
       type: str
+      description: IPv4 network/Mask

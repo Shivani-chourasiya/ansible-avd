@@ -8,31 +8,30 @@ keys:
     primary_key: name
     convert_types:
     - dict
+    required: true
     items:
       type: dict
       keys:
         name:
           type: str
           required: true
+          description: Username
         privilege:
           type: int
           convert_types:
           - str
           min: 1
           max: 15
-          description: |
-            Initial privilege level with local EXEC authorization.
+          description: Initial privilege level with local EXEC authorization.
         role:
           type: str
-          description: |
-            EOS RBAC Role to be assigned to the user such as "network-admin" or "network-operator"
+          description: EOS RBAC Role to be assigned to the user such as "network-admin" or "network-operator"
         sha512_password:
           type: str
-          description: |
-            Must be the hash of the password. By default EOS salts the password with the username, so the simplest is to generate the hash on an EOS device using the same username.
+          description: Must be the hash of the password. By default EOS salts the password with the username, so the simplest is to generate the hash on an EOS device using the same username.
         no_password:
           type: bool
-          description: |
-            If set a password will not be configured for this user. "sha512_password" MUST not be defined for this user.
+          description: If set a password will not be configured for this user. "sha512_password" MUST not be defined for this user.
         ssh_key:
           type: str
+          description: SSH key string

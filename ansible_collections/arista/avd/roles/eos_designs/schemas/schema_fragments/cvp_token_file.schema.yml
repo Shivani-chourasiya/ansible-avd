@@ -7,4 +7,5 @@ keys:
     type: str
     default: '/tmp/cv-onboarding-token'
     description: |
+      cvp_token_file is only applicable to CV as a Service.
       cvp_token_file is path to token file on switch

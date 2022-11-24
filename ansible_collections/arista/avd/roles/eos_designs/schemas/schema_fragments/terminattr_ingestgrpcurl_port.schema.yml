@@ -4,8 +4,8 @@
 type: dict
 keys:
   terminattr_ingestgrpcurl_port:
-    display_name: Ingest gRPC URL Port Number
     type: int
     convert_types:
     - str
     default: 9910
+    description: Ingest gRPC URL port number

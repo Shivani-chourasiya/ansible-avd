@@ -5,4 +5,5 @@ type: dict
 keys:
   mgmt_vrf_routing:
     type: bool
-    default: False
+    default: false
+    description: Management interface configuration

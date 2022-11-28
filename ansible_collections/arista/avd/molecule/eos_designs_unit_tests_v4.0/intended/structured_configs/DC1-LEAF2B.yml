@@ -193,7 +193,7 @@ router_bgp:
         - 100000:20161
       redistribute_routes:
       - learned
-      vlan: 161
+      vlan: '161'
     Tenant_B_OP_Zone:
       rd: '65001:20'
       route_targets:

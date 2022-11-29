@@ -1211,6 +1211,7 @@ keys:
             default: EVPN-OVERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
         studios_options:
           exclude: true
@@ -1221,6 +1222,7 @@ keys:
             default: IPv4-UNDERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
         studios_options:
           exclude: true
@@ -1231,6 +1233,7 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
             type: str
           password:
+            description: Encrypted Password
             type: str
         studios_options:
           exclude: true
@@ -1241,6 +1244,7 @@ keys:
             default: EVPN-OVERLAY-CORE
             type: str
           password:
+            description: Encrypted Password
             type: str
         type: dict
       evpn_overlay_peers:
@@ -1249,6 +1253,7 @@ keys:
             default: EVPN-OVERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
         type: dict
       ipv4_underlay_peers:
@@ -1257,6 +1262,7 @@ keys:
             default: IPv4-UNDERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
         type: dict
       mlag_ipv4_underlay_peer:
@@ -1265,6 +1271,7 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
             type: str
           password:
+            description: Encrypted Password
             type: str
         type: dict
     type: dict
@@ -1394,7 +1401,6 @@ keys:
       See "Details on enable_trunk_groups" below before enabling this feature
 
       '
-    display_name: Enable Trunk Group support across eos_designs
     type: bool
   event_handlers:
     convert_types:
@@ -1463,6 +1469,7 @@ keys:
       '
     type: int
   evpn_hostflap_detection:
+    description: EVPN Host Flapping Settings
     keys:
       enabled:
         default: true
@@ -1605,6 +1612,7 @@ keys:
     type: dict
   isis_advertise_passive_only:
     default: false
+    description: ISIS Advertise Passive Only
     type: bool
   isis_area_id:
     default: '49.0001'
@@ -1612,12 +1620,14 @@ keys:
     type: str
   isis_default_is_type:
     default: level-2
+    description: ISIS Default IS Type
     type: str
     valid_values:
     - level-1-2
     - level-1
     - level-2
   isis_ti_lfa:
+    description: ISIS TI-LFA
     keys:
       enabled:
         default: false
@@ -2044,6 +2054,9 @@ keys:
     convert_types:
     - str
     default: 9000
+    description: Point to Point Links MTU
+    max: 9216
+    min: 0
     type: int
   p2p_uplinks_qos_profile:
     description: QOS Profile assigned on all infrastructure links
@@ -2294,6 +2307,7 @@ keys:
   timezone:
     type: str
   trunk_groups:
+    description: Trunk Group Names
     keys:
       mlag:
         description: '"mlag" is the Trunk Group used for MLAG VLAN (Typically VLAN
@@ -2303,6 +2317,7 @@ keys:
         keys:
           name:
             default: MLAG
+            description: Trunk Group Name
             type: str
         type: dict
       mlag_l3:
@@ -2315,6 +2330,7 @@ keys:
         keys:
           name:
             default: LEAF_PEER_L3
+            description: Trunk Group Name
             type: str
         type: dict
       uplink:
@@ -2325,6 +2341,7 @@ keys:
         keys:
           name:
             default: UPLINK
+            description: Trunk Group Name
             type: str
         type: dict
     type: dict
@@ -2333,7 +2350,7 @@ keys:
     required: true
     type: str
   underlay_filter_peer_as:
-    default: '0000:0000:'
+    default: false
     description: 'Configure route-map on eBGP sessions towards underlay peers, where
       prefixes with the peer''s ASN in the AS Path are filtered away.
 
@@ -2346,7 +2363,7 @@ keys:
       Note this key is ignored when EVPN is configured.
 
       '
-    type: str
+    type: bool
   underlay_ipv6:
     default: false
     description: 'This feature allows IPv6 underlay routing protocol with RFC5549
@@ -2359,6 +2376,7 @@ keys:
     type: bool
   underlay_isis_instance_name:
     default: EVPN_UNDERLAY
+    description: Underlay ISIS Instance Name
     type: str
   underlay_multicast:
     default: false
@@ -2377,15 +2395,18 @@ keys:
     type: bool
   underlay_ospf_area:
     default: 0.0.0.0
+    description: Underlay OSPF Area
     format: ipv4
     type: str
   underlay_ospf_bfd_enable:
     default: false
+    description: Enable Underlay OSPF BFD
     type: bool
   underlay_ospf_max_lsa:
     convert_types:
     - str
     default: 12000
+    description: Underlay OSPF Max LSA
     type: int
   underlay_ospf_process_id:
     convert_types:

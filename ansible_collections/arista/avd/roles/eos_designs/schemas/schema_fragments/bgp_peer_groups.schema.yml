@@ -17,6 +17,7 @@ keys:
             default: IPv4-UNDERLAY-PEERS
           password:
             type: str
+            description: Encrypted Password
       mlag_ipv4_underlay_peer:
         type: dict
         keys:
@@ -25,6 +26,7 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
           password:
             type: str
+            description: Encrypted Password
       evpn_overlay_peers:
         type: dict
         keys:
@@ -33,6 +35,7 @@ keys:
             default: EVPN-OVERLAY-PEERS
           password:
             type: str
+            description: Encrypted Password
       evpn_overlay_core:
         type: dict
         keys:
@@ -41,6 +44,7 @@ keys:
             default: EVPN-OVERLAY-CORE
           password:
             type: str
+            description: Encrypted Password
       IPv4_UNDERLAY_PEERS:
         type: dict
         #unsupported_from_version: 4.0
@@ -50,6 +54,7 @@ keys:
             default: IPv4-UNDERLAY-PEERS
           password:
             type: str
+            description: Encrypted Password
         studios_options:
           exclude: True
       MLAG_IPv4_UNDERLAY_PEER:
@@ -61,6 +66,7 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
           password:
             type: str
+            description: Encrypted Password
         studios_options:
           exclude: True
       EVPN_OVERLAY_PEERS:
@@ -72,5 +78,6 @@ keys:
             default: EVPN-OVERLAY-PEERS
           password:
             type: str
+            description: Encrypted Password
         studios_options:
           exclude: True

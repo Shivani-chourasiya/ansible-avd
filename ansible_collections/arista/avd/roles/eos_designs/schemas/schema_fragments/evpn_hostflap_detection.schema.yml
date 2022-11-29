@@ -4,6 +4,7 @@
 type: dict
 keys:
   evpn_hostflap_detection:
+    description: EVPN Host Flapping Settings
     type: dict
     keys:
       enabled:

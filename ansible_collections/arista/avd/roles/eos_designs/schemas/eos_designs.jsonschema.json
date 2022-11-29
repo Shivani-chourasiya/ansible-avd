@@ -56,6 +56,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -72,6 +73,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -88,6 +90,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -104,6 +107,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -120,6 +124,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -136,6 +141,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -152,6 +158,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -286,8 +293,8 @@
     "enable_trunk_groups": {
       "default": false,
       "description": "Warning: Because of the nature of the EOS Trunk Group feature, enabling this is \"all or nothing\".\n*All* vlans and *all* trunks towards connected endpoints must be using trunk groups as well.\nIf trunk groups are not assigned to a trunk, no vlans will be enabled on that trunk.\nSee \"Details on enable_trunk_groups\" below before enabling this feature\n",
-      "title": "Enable Trunk Group support across eos_designs",
-      "type": "boolean"
+      "type": "boolean",
+      "title": "Enable Trunk Groups"
     },
     "event_handlers": {
       "description": "Gives ability to monitor and react to Syslog messages provides a powerful and flexible tool that can be used to apply self-healing actions,\ncustomize the system behavior, and implement workarounds to problems discovered in the field.\n",
@@ -357,6 +364,7 @@
       "title": "Evpn Ebgp Multihop"
     },
     "evpn_hostflap_detection": {
+      "description": "EVPN Host Flapping Settings",
       "properties": {
         "enabled": {
           "default": true,
@@ -476,6 +484,7 @@
     },
     "isis_advertise_passive_only": {
       "default": false,
+      "description": "ISIS Advertise Passive Only",
       "type": "boolean",
       "title": "ISIS Advertise Passive Only"
     },
@@ -487,6 +496,7 @@
     },
     "isis_default_is_type": {
       "default": "level-2",
+      "description": "ISIS Default IS Type",
       "type": "string",
       "enum": [
         "level-1-2",
@@ -496,6 +506,7 @@
       "title": "ISIS Default IS Type"
     },
     "isis_ti_lfa": {
+      "description": "ISIS TI-LFA",
       "properties": {
         "enabled": {
           "default": false,
@@ -1058,6 +1069,9 @@
     },
     "p2p_uplinks_mtu": {
       "default": 9000,
+      "description": "Point to Point Links MTU",
+      "maximum": 9216,
+      "minimum": 0,
       "type": "integer",
       "title": "P2P Uplinks MTU"
     },
@@ -1404,12 +1418,14 @@
       "title": "Timezone"
     },
     "trunk_groups": {
+      "description": "Trunk Group Names",
       "properties": {
         "mlag": {
           "description": "\"mlag\" is the Trunk Group used for MLAG VLAN (Typically VLAN 4094)\n",
           "properties": {
             "name": {
               "default": "MLAG",
+              "description": "Trunk Group Name",
               "type": "string",
               "title": "Name"
             }
@@ -1423,6 +1439,7 @@
           "properties": {
             "name": {
               "default": "LEAF_PEER_L3",
+              "description": "Trunk Group Name",
               "type": "string",
               "title": "Name"
             }
@@ -1436,6 +1453,7 @@
           "properties": {
             "name": {
               "default": "UPLINK",
+              "description": "Trunk Group Name",
               "type": "string",
               "title": "Name"
             }
@@ -1454,9 +1472,9 @@
       "title": "Type"
     },
     "underlay_filter_peer_as": {
-      "default": "0000:0000:",
+      "default": false,
       "description": "Configure route-map on eBGP sessions towards underlay peers, where prefixes with the peer's ASN in the AS Path are filtered away.\nThis is very useful in very large scale networks not using EVPN overlays, where convergence will be quicker by not having to return\nall updates received from Spine-1 to Spine-2 just for Spine-2 to throw them away because of AS Path loop detection.\nNote this key is ignored when EVPN is configured.\n",
-      "type": "string",
+      "type": "boolean",
       "title": "Underlay Filter Peer As"
     },
     "underlay_ipv6": {
@@ -1467,6 +1485,7 @@
     },
     "underlay_isis_instance_name": {
       "default": "EVPN_UNDERLAY",
+      "description": "Underlay ISIS Instance Name",
       "type": "string",
       "title": "Underlay ISIS Instance Name"
     },
@@ -1478,17 +1497,20 @@
     },
     "underlay_ospf_area": {
       "default": "0.0.0.0",
+      "description": "Underlay OSPF Area",
       "format": "ipv4",
       "type": "string",
       "title": "Underlay OSPF Area"
     },
     "underlay_ospf_bfd_enable": {
       "default": false,
+      "description": "Enable Underlay OSPF BFD",
       "type": "boolean",
       "title": "Underlay OSPF BFD Enable"
     },
     "underlay_ospf_max_lsa": {
       "default": 12000,
+      "description": "Underlay OSPF Max LSA",
       "type": "integer",
       "title": "Underlay OSPF Max LSA"
     },

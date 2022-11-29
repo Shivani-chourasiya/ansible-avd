@@ -165,6 +165,27 @@
       "type": "object",
       "title": "BGP Peer Groups"
     },
+    "connected_endpoints_keys": {
+      "items": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "key"
+        ]
+      },
+      "type": "array",
+      "title": "Connected Endpoints Keys"
+    },
     "custom_structured_configuration_list_merge": {
       "default": "replace",
       "description": "The List-merge strategy can be changed using `custom_structured_configuration_list_merge` variable using any value accepted by `list_merge` on the Ansible Combine filter.\n",
@@ -543,7 +564,7 @@
                 "default": false,
                 "description": "Enable PTP",
                 "type": "boolean",
-                "title": "Ptp Enable"
+                "title": "PTP Enable"
               },
               "qos_profile": {
                 "description": "QOS Service Profile",
@@ -1259,7 +1280,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "title": "Uplink Ptp"
+      "title": "Uplink PTP"
     },
     "vtep_vvtep_ip": {
       "description": "IP Address used as Virtual VTEP. Will be configured as secondary IP on loopback1\nThis is only needed for centralized routing designs\n",

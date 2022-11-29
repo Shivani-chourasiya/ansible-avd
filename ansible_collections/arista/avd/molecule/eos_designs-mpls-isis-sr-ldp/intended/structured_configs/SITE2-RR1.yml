@@ -103,7 +103,6 @@ loopback_interfaces:
     ip_address: 100.70.0.9/32
     ipv6_address: 2000:1234:ffff:ffff::9/128
     mpls:
-      ip: true
       ldp:
         interface: true
     isis_enable: CORE
@@ -149,8 +148,10 @@ ethernet_interfaces:
     type: routed
     shutdown: false
     mtu: 9178
+    eos_cli: 'link-debounce time 1000
+
+      '
     ip_address: 100.64.48.13/31
-    speed: forced 40gfull
     ipv6_enable: true
     isis_enable: CORE
     isis_metric: 60
@@ -164,9 +165,7 @@ ethernet_interfaces:
       ldp:
         interface: true
         igp_sync: true
-    eos_cli: 'link-debounce time 1000
-
-      '
+    speed: forced 40gfull
 router_bfd:
   multihop:
     interval: 300

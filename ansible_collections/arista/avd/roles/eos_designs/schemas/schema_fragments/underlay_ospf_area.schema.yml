@@ -4,6 +4,7 @@
 type: dict
 keys:
   underlay_ospf_area:
+    description: Underlay OSPF Area
     type: str
     format: ipv4
     default: "0.0.0.0"

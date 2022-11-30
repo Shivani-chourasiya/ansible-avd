@@ -1211,6 +1211,7 @@ keys:
             default: EVPN-OVERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
         studios_options:
           exclude: true
@@ -1221,6 +1222,7 @@ keys:
             default: IPv4-UNDERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
           structured_config:
             description: Custom structured config added under router_bgp.peer_groups.<name>
@@ -1235,6 +1237,7 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
             type: str
           password:
+            description: Encrypted Password
             type: str
         studios_options:
           exclude: true
@@ -1245,6 +1248,7 @@ keys:
             default: EVPN-OVERLAY-CORE
             type: str
           password:
+            description: Encrypted Password
             type: str
         type: dict
       evpn_overlay_peers:
@@ -1253,6 +1257,7 @@ keys:
             default: EVPN-OVERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
         type: dict
       ipv4_underlay_peers:
@@ -1261,6 +1266,7 @@ keys:
             default: IPv4-UNDERLAY-PEERS
             type: str
           password:
+            description: Encrypted Password
             type: str
           structured_config:
             description: Custom structured config added under router_bgp.peer_groups.<name>
@@ -1273,6 +1279,7 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
             type: str
           password:
+            description: Encrypted Password
             type: str
         type: dict
     type: dict
@@ -1601,11 +1608,13 @@ keys:
             convert_types:
             - str
             default: 1006
+            description: VLAN ID
             type: int
           ending:
             convert_types:
             - str
             default: 1199
+            description: VLAN ID
             type: int
         type: dict
     required: true
@@ -1699,8 +1708,10 @@ keys:
               type: str
             ptp_enable:
               default: false
+              description: Enable PTP
               type: bool
             qos_profile:
+              description: QOS Service Profile
               type: str
             speed:
               description: Speed | Optional

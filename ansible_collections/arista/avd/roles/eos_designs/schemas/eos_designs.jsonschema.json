@@ -56,6 +56,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -72,6 +73,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             },
@@ -93,6 +95,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -109,6 +112,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -125,6 +129,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -141,6 +146,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             },
@@ -162,6 +168,7 @@
               "title": "Name"
             },
             "password": {
+              "description": "Encrypted Password",
               "type": "string",
               "title": "Password"
             }
@@ -464,11 +471,13 @@
           "properties": {
             "beginning": {
               "default": 1006,
+              "description": "VLAN ID",
               "type": "integer",
               "title": "Beginning"
             },
             "ending": {
               "default": 1199,
+              "description": "VLAN ID",
               "type": "integer",
               "title": "Ending"
             }
@@ -606,10 +615,12 @@
               },
               "ptp_enable": {
                 "default": false,
+                "description": "Enable PTP",
                 "type": "boolean",
                 "title": "PTP Enable"
               },
               "qos_profile": {
+                "description": "QOS Service Profile",
                 "type": "string",
                 "title": "QOS Profile"
               },

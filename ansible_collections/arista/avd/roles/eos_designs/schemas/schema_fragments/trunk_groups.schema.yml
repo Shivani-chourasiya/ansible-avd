@@ -4,7 +4,6 @@
 type: dict
 keys:
   trunk_groups:
-    description: Trunk Group Names
     type: dict
     keys:
       mlag:
@@ -14,7 +13,6 @@ keys:
         keys:
           name:
             type: str
-            description: Trunk Group Name
             default: "MLAG"
       mlag_l3:
         type: dict
@@ -24,7 +22,6 @@ keys:
         keys:
           name:
             type: str
-            description: Trunk Group Name
             default: "LEAF_PEER_L3"
       uplink:
         type: dict
@@ -33,5 +30,4 @@ keys:
         keys:
           name:
             type: str
-            description: Trunk Group Name
             default: "UPLINK"

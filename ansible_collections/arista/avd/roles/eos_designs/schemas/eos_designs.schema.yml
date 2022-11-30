@@ -1211,7 +1211,6 @@ keys:
             default: EVPN-OVERLAY-PEERS
             type: str
           password:
-            description: Encrypted Password
             type: str
         studios_options:
           exclude: true
@@ -1222,8 +1221,11 @@ keys:
             default: IPv4-UNDERLAY-PEERS
             type: str
           password:
-            description: Encrypted Password
             type: str
+          structured_config:
+            description: Custom structured config added under router_bgp.peer_groups.<name>
+              for eos_cli_config_gen
+            type: dict
         studios_options:
           exclude: true
         type: dict
@@ -1233,7 +1235,6 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
             type: str
           password:
-            description: Encrypted Password
             type: str
         studios_options:
           exclude: true
@@ -1244,7 +1245,6 @@ keys:
             default: EVPN-OVERLAY-CORE
             type: str
           password:
-            description: Encrypted Password
             type: str
         type: dict
       evpn_overlay_peers:
@@ -1253,7 +1253,6 @@ keys:
             default: EVPN-OVERLAY-PEERS
             type: str
           password:
-            description: Encrypted Password
             type: str
         type: dict
       ipv4_underlay_peers:
@@ -1262,8 +1261,11 @@ keys:
             default: IPv4-UNDERLAY-PEERS
             type: str
           password:
-            description: Encrypted Password
             type: str
+          structured_config:
+            description: Custom structured config added under router_bgp.peer_groups.<name>
+              for eos_cli_config_gen
+            type: dict
         type: dict
       mlag_ipv4_underlay_peer:
         keys:
@@ -1271,7 +1273,6 @@ keys:
             default: MLAG-IPv4-UNDERLAY-PEER
             type: str
           password:
-            description: Encrypted Password
             type: str
         type: dict
     type: dict
@@ -1389,8 +1390,10 @@ keys:
     type: dict
   enable_trunk_groups:
     default: false
-    description: 'Warning: Because of the nature of the EOS Trunk Group feature, enabling
-      this is "all or nothing".
+    description: 'Enable Trunk Group support across eos_designs
+
+      Warning: Because of the nature of the EOS Trunk Group feature, enabling this
+      is "all or nothing".
 
       *All* vlans and *all* trunks towards connected endpoints must be using trunk
       groups as well.
@@ -1469,7 +1472,6 @@ keys:
       '
     type: int
   evpn_hostflap_detection:
-    description: EVPN Host Flapping Settings
     keys:
       enabled:
         default: true
@@ -1599,20 +1601,17 @@ keys:
             convert_types:
             - str
             default: 1006
-            description: VLAN ID
             type: int
           ending:
             convert_types:
             - str
             default: 1199
-            description: VLAN ID
             type: int
         type: dict
     required: true
     type: dict
   isis_advertise_passive_only:
     default: false
-    description: ISIS Advertise Passive Only
     type: bool
   isis_area_id:
     default: '49.0001'
@@ -1620,14 +1619,12 @@ keys:
     type: str
   isis_default_is_type:
     default: level-2
-    description: ISIS Default IS Type
     type: str
     valid_values:
     - level-1-2
     - level-1
     - level-2
   isis_ti_lfa:
-    description: ISIS TI-LFA
     keys:
       enabled:
         default: false
@@ -1702,10 +1699,8 @@ keys:
               type: str
             ptp_enable:
               default: false
-              description: Enable PTP
               type: bool
             qos_profile:
-              description: QOS Service Profile
               type: str
             speed:
               description: Speed | Optional
@@ -2307,7 +2302,6 @@ keys:
   timezone:
     type: str
   trunk_groups:
-    description: Trunk Group Names
     keys:
       mlag:
         description: '"mlag" is the Trunk Group used for MLAG VLAN (Typically VLAN
@@ -2317,7 +2311,6 @@ keys:
         keys:
           name:
             default: MLAG
-            description: Trunk Group Name
             type: str
         type: dict
       mlag_l3:
@@ -2330,7 +2323,6 @@ keys:
         keys:
           name:
             default: LEAF_PEER_L3
-            description: Trunk Group Name
             type: str
         type: dict
       uplink:
@@ -2341,7 +2333,6 @@ keys:
         keys:
           name:
             default: UPLINK
-            description: Trunk Group Name
             type: str
         type: dict
     type: dict
@@ -2376,7 +2367,6 @@ keys:
     type: bool
   underlay_isis_instance_name:
     default: EVPN_UNDERLAY
-    description: Underlay ISIS Instance Name
     type: str
   underlay_multicast:
     default: false
@@ -2395,18 +2385,15 @@ keys:
     type: bool
   underlay_ospf_area:
     default: 0.0.0.0
-    description: Underlay OSPF Area
     format: ipv4
     type: str
   underlay_ospf_bfd_enable:
     default: false
-    description: Enable Underlay OSPF BFD
     type: bool
   underlay_ospf_max_lsa:
     convert_types:
     - str
     default: 12000
-    description: Underlay OSPF Max LSA
     type: int
   underlay_ospf_process_id:
     convert_types:

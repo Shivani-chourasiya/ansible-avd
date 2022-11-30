@@ -4,7 +4,6 @@
 type: dict
 keys:
   underlay_ospf_max_lsa:
-    description: Underlay OSPF Max LSA
     type: int
     convert_types:
       - str

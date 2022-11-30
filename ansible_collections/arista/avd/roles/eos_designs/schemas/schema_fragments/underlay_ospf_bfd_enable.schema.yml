@@ -4,6 +4,5 @@
 type: dict
 keys:
   underlay_ospf_bfd_enable:
-    description: Enable Underlay OSPF BFD
     type: bool
     default: false

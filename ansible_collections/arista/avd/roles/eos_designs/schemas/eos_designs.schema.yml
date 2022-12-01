@@ -233,8 +233,6 @@ dynamic_keys:
                 - dot1q-tunnel
                 - trunk
               monitor_sessions:
-                convert_types:
-                - dict
                 description: Monitor Session configuration - Use defined switchports
                   as source or destination for monitoring sessions
                 items:
@@ -423,6 +421,8 @@ dynamic_keys:
                               type: int
                           type: dict
                         number:
+                          convert_types:
+                          - str
                           description: Subinterface number
                           type: int
                         short_esi:
@@ -2625,11 +2625,21 @@ keys:
   connected_endpoints_keys:
     convert_types:
     - dict
+    description: 'Define connected endpoints keys, to define grouping of endpoints
+      connecting to the fabric.
+
+      This provides the ability to define various keys of your choice to better organize/group
+      your data.
+
+      This should be defined in top level group_var for the fabric.
+
+      '
     items:
       keys:
         key:
           type: str
         type:
+          description: Type used for documentation
           type: str
       type: dict
     primary_key: key
@@ -3120,7 +3130,7 @@ keys:
     type: bool
   fabric_name:
     description: Fabric Name, required to match Ansible Group name covering all devices
-      in the Fabric
+      in the Fabric, **must** be an inventory group name.
     required: true
     type: str
   inband_management_subnet:
@@ -3746,6 +3756,21 @@ keys:
       By configuring overlay_rt_type the Administrator subfield (first part of RT)
       can be set to other values.
 
+      Note: structured configuration is not merged recursively and will be taken directly
+      from the most specific level in the following order:
+
+      1. svi.nodes[inventory_hostname].structured_config
+
+      2. svi_profile.nodes[inventory_hostname].structured_config
+
+      3. svi_parent_profile.nodes[inventory_hostname].structured_config
+
+      4. svi.structured_config
+
+      5. svi_profile.structured_config
+
+      6. svi_parent_profile.structured_config
+
       '
     keys:
       admin_subfield:
@@ -3841,7 +3866,7 @@ keys:
     secondary_key: speeds
     type: list
   pod_name:
-    description: 'POD Name, only used in Fabric Documentation | Optional, fallback
+    description: 'POD Name, only used in Fabric Documentation (Optional), fallback
       to dc_name and then to fabric_name.
 
       Recommended to be common between Spines, Leafs within a POD (One l3ls topology)

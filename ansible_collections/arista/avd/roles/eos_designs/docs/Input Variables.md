@@ -76,7 +76,7 @@ bgp_maximum_paths: <int>
 
 ### Description
 
-BGP Mesh PES
+Whether to configure an iBGP full mesh between PEs, either because there is no RR used or other reasons.
 ### Variables
 
 | Variable | Type | Required | Default | Value Restrictions | Description |

@@ -1195,7 +1195,8 @@ keys:
     type: int
   bgp_mesh_pes:
     default: false
-    description: BGP Mesh PES
+    description: Whether to configure an iBGP full mesh between PEs, either because
+      there is no RR used or other reasons.
     type: bool
   bgp_peer_groups:
     description: 'Leverage an Arista EOS switch to generate the encrypted password

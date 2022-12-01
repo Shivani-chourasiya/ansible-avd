@@ -280,7 +280,7 @@ router_bgp:
         - 20161:20161
       redistribute_routes:
       - learned
-      vlan: 161
+      vlan: '161'
     Tenant_B_OP_Zone:
       rd: '65103:20'
       route_targets:

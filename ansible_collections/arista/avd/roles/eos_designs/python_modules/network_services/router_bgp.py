@@ -323,7 +323,7 @@ class RouterBgpMixin(UtilsMixin):
             for l2vlan in tenant["l2vlans"]:
                 if (bundle := self._router_bgp_vlans_vlan(l2vlan, tenant)) is not None:
                     # We are reusing the regular bgp vlan function so need to add vlan info
-                    bundle["vlan"] = l2vlan["id"]
+                    bundle["vlan"] = str(l2vlan["id"])
                     bundle_name = l2vlan["name"]
                     bundles[bundle_name] = bundle
 

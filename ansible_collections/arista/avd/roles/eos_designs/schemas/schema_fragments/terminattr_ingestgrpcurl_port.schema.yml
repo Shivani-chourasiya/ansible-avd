@@ -8,4 +8,3 @@ keys:
     convert_types:
     - str
     default: 9910
-    description: Port number

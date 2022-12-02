@@ -11,4 +11,3 @@ keys:
       CVaaS defined, only on-prem is going to be configured.
     items:
       type: str
-      description: IPv4 address or CV as a Service hostname

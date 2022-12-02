@@ -8,14 +8,12 @@ keys:
     primary_key: name
     convert_types:
     - dict
-    description: Dictionary of local users
     items:
       type: dict
       keys:
         name:
           type: str
-          required: True
-          description: Username
+          required: true
         privilege:
           type: int
           convert_types:
@@ -31,13 +29,6 @@ keys:
           description: Must be the hash of the password. By default EOS salts the password with the username, so the simplest is to generate the hash on an EOS device using the same username.
         no_password:
           type: bool
-          default: True
           description: If set a password will not be configured for this user. "sha512_password" MUST not be defined for this user.
         ssh_key:
           type: str
-          description: SSH key string
-        disabled:
-          type: bool
-          description: |
-            If "disabled" is true, the user will be removed and all other settings are ignored.
-            Useful for removing the default "admin" user.
